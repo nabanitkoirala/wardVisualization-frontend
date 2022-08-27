@@ -1,0 +1,43 @@
+.mainContainer {
+    width: 100%;
+    display: flex;
+
+    .sideBar {
+        width: 30%;
+        height: 100vh;
+        overflow: scroll;
+        background-color: #E6E4E0;
+
+        .data-count {
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+            border: 1px solid gray;
+            padding: 20px;
+        }
+    }
+
+    .mapContainer {
+        width: 70%;
+        position: relative;
+
+        .mapFilter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+        }
+
+        .checkboxes {
+            position: absolute;
+            top: 10px;
+            right: 0;
+            margin-right: 10px;
+            background-color: #E6E4E0;
+            // opacity: 0.6;
+            // color: white;
+        }
+    }
+}
