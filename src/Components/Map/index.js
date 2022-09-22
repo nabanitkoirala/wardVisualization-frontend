@@ -17,6 +17,7 @@ const Map = ({ datas, data, clickedButton,
     const [lat, setLat] = useState(26.816148518269014);
     const [zoom, setZoom] = useState(16);
     const [initialMapRender, setInitialMapRender] = useState(true)
+    const [mapType, setMapType] = useState('General Map View')
     const mapContainer = useRef(null);
     const mapRef = useRef(null);
     let hoveredWardId = hoveredId;
@@ -169,7 +170,12 @@ const Map = ({ datas, data, clickedButton,
                 'type': 'circle',
                 'source': 'hospital-list',
                 'paint': {
-                    'circle-radius': 8,
+                    'circle-radius': [
+                        'case',
+                        ['boolean', ['feature-state', 'hover'], false],
+                        14,
+                        8
+                    ],
                     'circle-color': 'blue',
                     // 'circle-opacity': 0.67,
                     'circle-opacity': [
@@ -365,19 +371,10 @@ const Map = ({ datas, data, clickedButton,
                 popup.setLngLat([e.lngLat.lng, e.lngLat.lat]).setHTML(popupOverall).addTo(map);
             })
         });
-
-
         return () => {
 
             map.remove()
         }
-
-
-
-
-
-
-
         // if (!map) initializeMap({ setMap, mapContainer });
     }, [])
 
@@ -389,12 +386,12 @@ const Map = ({ datas, data, clickedButton,
 
             if (hoveredId) {
                 mapRef.current.setPaintProperty('population', 'circle-opacity', ['match', ['id'], hoveredId, 0.5, 1])
-                // mapRef.current.setPaintProperty('population', 'circle-radius', ['match', ['id'], hoveredId, 14, 8])
+                mapRef.current.setPaintProperty('population', 'circle-radius', ['match', ['id'], hoveredId, 14, 8])
                 // mapRef.current.setPaintProperty('population', 'circle-color', ['match', ['id'], hoveredId, 'red', 'blue'])
             }
 
         }
-        console.log('This is render', hoveredId)
+
         return () => {
             if (mapRef.current && mapRef.current.isStyleLoaded()) {
                 mapRef.current.setPaintProperty('population', 'circle-opacity', [
@@ -402,6 +399,12 @@ const Map = ({ datas, data, clickedButton,
                     ['boolean', ['feature-state', 'hover'], false],
                     0.5,
                     1
+                ])
+                mapRef.current.setPaintProperty('population', 'circle-radius', [
+                    'case',
+                    ['boolean', ['feature-state', 'hover'], false],
+                    14,
+                    8
                 ])
             }
         }
@@ -529,32 +532,50 @@ const Map = ({ datas, data, clickedButton,
     const mapView = [
         {
             name: 'General Map View',
-            style: 'mapbox://styles/nabanit/cl6cbna85000g14n3aj31u8m4'
+            style: 'mapbox://styles/nabanit/cl6ai7jt2000114od7pyefvzt'
         },
         {
             name: 'Satellite Map View',
-            style: 'mapbox://styles/nabanit/cl6ai7jt2000114od7pyefvzt'
+            style: 'mapbox://styles/nabanit/cl6cbna85000g14n3aj31u8m4'
         }
     ]
 
     const changeStyle = (style) => {
         if (mapRef.current) {
-            console.log("This is final ")
+
             mapRef.current.setStyle(style)
         }
     }
+
+    const handleSwitchMap = () => {
+        if (mapType === 'General Map View') {
+            const filteredData = mapView.find(item => item.name === 'Satellite Map View')
+            setMapType('Satellite Map View')
+            changeStyle(filteredData.style)
+
+        } else {
+            const filteredData = mapView.find(item => item.name === 'General Map View')
+            setMapType('General Map View')
+            changeStyle(filteredData.style)
+        }
+    }
+
     return (
         <>
             <div ref={mapContainer} className='map-main-style' >
 
 
             </div>
-            <div style={{ position: 'absolute', top: 0, left: 0, zIndex: 999 }} >
-                {mapView.map((item) => (
+            <div style={{ position: 'absolute', bottom: '-325px', right: '50px', zIndex: 999 }} >
+                {/* {mapView.map((item) => (
                     <button onClick={() => {
                         changeStyle(item.style)
+                        setMapType(item.name)
                     }} >{item.name}</button>
-                ))}
+                ))} */}
+                <button type='button' onClick={handleSwitchMap} >
+                    {mapType === 'General Map View' ? 'Satellite Map View' : 'General Map View'}
+                </button>
             </div>
         </>
     )

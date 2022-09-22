@@ -17,7 +17,7 @@ import { Bar } from 'react-chartjs-2';
 import './styles.scss'
 import TableData from '../Components/TableData';
 import GroupFilterListContainer from '../Components/GroupFilterListContainer';
-import PopulationDistributionCount from '../Components/MinorComponents/populationDistributionCount';
+import PopulationDistributionCount from '../Components/MinorComponents/PopulationDistribution/populationDistributionCount';
 import InfrastructureGraph from '../Components/MinorComponents/InfrastructureGraph';
 ChartJS.register(
     CategoryScale,
@@ -345,160 +345,160 @@ const Dashboard = () => {
                 "type": 'population'
             }
         },
-        // {
-        //     'type': 'Feature',
-        //     'id': 20,
-        //     'geometry': {
-        //         'type': 'Point',
-        //         'coordinates': [87.283692, 26.816956],
-        //     },
-        //     'properties': {
-        //         "houseNumber": 14,
-        //         "name": 'Rajan Baniya',
-        //         "storey": 3,
-        //         "ownerOccupation": 'Business',
-        //         "annualIncome": 500000,
-        //         "contact": "982088396",
-        //         "address": "Chatara Line",
-        //         "totalMembers": 13,
-        //         "maleMembers": 8,
-        //         "femaleMembers": 4,
-        //         "otherMembers": 1,
-        //         "onRent": "yes",
-        //         "houseImage": "house2.jpg",
-        //         "rentInfo": [
-        //             {
-        //                 "rentOwner": "Krishna Giri",
-        //                 "annualIncome": 1000000,
-        //                 "occupation": "Driver",
-        //                 "contact": "1234567890",
-        //                 "address": "Shankhuwasava-5,khadbari",
-        //                 "totalMembers": 3,
-        //                 "maleMembers": 2,
-        //                 "femaleMembers": 1,
-        //                 "otherMembers": 0
-        //             },
-        //             {
-        //                 "rentOwner": "Ramesh Basnet",
-        //                 "annualIncome": 1500000,
-        //                 "occupation": "Auto Driver",
-        //                 "contact": "1234567890",
-        //                 "address": "khotang-5",
-        //                 "totalMembers": 3,
-        //                 "maleMembers": 2,
-        //                 "femaleMembers": 1,
-        //                 "otherMembers": 0
-        //             }
-        //         ],
-        //         "type": 'population'
-        //     }
-        // },
-        // {
-        //     'type': 'Feature',
-        //     'id': 21,
-        //     'geometry': {
-        //         'type': 'Point',
-        //         'coordinates': [87.283692, 26.816956],
-        //     },
-        //     'properties': {
-        //         "houseNumber": 14,
-        //         "name": 'Rajan Baniya',
-        //         "storey": 3,
-        //         "ownerOccupation": 'Business',
-        //         "annualIncome": 500000,
-        //         "contact": "982088396",
-        //         "address": "Chatara Line",
-        //         "totalMembers": 13,
-        //         "maleMembers": 8,
-        //         "femaleMembers": 4,
-        //         "otherMembers": 1,
-        //         "onRent": "yes",
-        //         "houseImage": "house2.jpg",
-        //         "rentInfo": [
-        //             {
-        //                 "rentOwner": "Krishna Giri",
-        //                 "annualIncome": 1000000,
-        //                 "occupation": "Driver",
-        //                 "contact": "1234567890",
-        //                 "address": "Shankhuwasava-5,khadbari",
-        //                 "totalMembers": 3,
-        //                 "maleMembers": 2,
-        //                 "femaleMembers": 1,
-        //                 "otherMembers": 0
-        //             },
-        //             {
-        //                 "rentOwner": "Ramesh Basnet",
-        //                 "annualIncome": 1500000,
-        //                 "occupation": "Auto Driver",
-        //                 "contact": "1234567890",
-        //                 "address": "khotang-5",
-        //                 "totalMembers": 3,
-        //                 "maleMembers": 2,
-        //                 "femaleMembers": 1,
-        //                 "otherMembers": 0
-        //             }
-        //         ],
-        //         "type": 'population'
-        //     }
-        // },
-        // {
-        //     'type': 'Feature',
-        //     'id': 22,
-        //     'geometry': {
-        //         'type': 'Point',
-        //         'coordinates': [87.283692, 26.816956],
-        //     },
-        //     'properties': {
-        //         "houseNumber": 14,
-        //         "name": 'Rajan Baniya',
-        //         "storey": 3,
-        //         "ownerOccupation": 'Business',
-        //         "annualIncome": 500000,
-        //         "contact": "982088396",
-        //         "address": "Chatara Line",
-        //         "totalMembers": 13,
-        //         "maleMembers": 8,
-        //         "femaleMembers": 4,
-        //         "otherMembers": 1,
-        //         "onRent": "yes",
-        //         "houseImage": "house2.jpg",
-        //         "rentInfo": [
-        //             {
-        //                 "rentOwner": "Krishna Giri",
-        //                 "annualIncome": 1000000,
-        //                 "occupation": "Driver",
-        //                 "contact": "1234567890",
-        //                 "address": "Shankhuwasava-5,khadbari",
-        //                 "totalMembers": 3,
-        //                 "maleMembers": 2,
-        //                 "femaleMembers": 1,
-        //                 "otherMembers": 0
-        //             },
-        //             {
-        //                 "rentOwner": "Ramesh Basnet",
-        //                 "annualIncome": 1500000,
-        //                 "occupation": "Auto Driver",
-        //                 "contact": "1234567890",
-        //                 "address": "khotang-5",
-        //                 "totalMembers": 3,
-        //                 "maleMembers": 2,
-        //                 "femaleMembers": 1,
-        //                 "otherMembers": 0
-        //             }
-        //         ],
-        //         "type": 'population'
-        //     }
-        // },
+        {
+            'type': 'Feature',
+            'id': 20,
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [87.279703, 26.816739],
+            },
+            'properties': {
+                "houseNumber": 14,
+                "name": 'Buddhi Bahadur Rai',
+                "storey": 3,
+                "ownerOccupation": 'Business',
+                "annualIncome": 500000,
+                "contact": "982088396",
+                "address": "Chatara Line",
+                "totalMembers": 13,
+                "maleMembers": 8,
+                "femaleMembers": 4,
+                "otherMembers": 1,
+                "onRent": "yes",
+                "houseImage": "house2.jpg",
+                "rentInfo": [
+                    {
+                        "rentOwner": "Gopal Giri",
+                        "annualIncome": 1000000,
+                        "occupation": "Driver",
+                        "contact": "1234567890",
+                        "address": "Shankhuwasava-5,khadbari",
+                        "totalMembers": 5,
+                        "maleMembers": 4,
+                        "femaleMembers": 1,
+                        "otherMembers": 0
+                    },
+                    {
+                        "rentOwner": "Ramesh Basnet",
+                        "annualIncome": 1500000,
+                        "occupation": "Auto Driver",
+                        "contact": "1234567890",
+                        "address": "khotang-5",
+                        "totalMembers": 3,
+                        "maleMembers": 2,
+                        "femaleMembers": 1,
+                        "otherMembers": 0
+                    }
+                ],
+                "type": 'population'
+            }
+        },
+        {
+            'type': 'Feature',
+            'id': 21,
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [87.280195, 26.816607]
+            },
+            'properties': {
+                "houseNumber": 15,
+                "name": 'Ramesh Jung Thapa',
+                "storey": 3,
+                "ownerOccupation": 'Business',
+                "annualIncome": 500000,
+                "contact": "982088396",
+                "address": "Chatara Line",
+                "totalMembers": 13,
+                "maleMembers": 8,
+                "femaleMembers": 4,
+                "otherMembers": 1,
+                "onRent": "yes",
+                "houseImage": "house2.jpg",
+                "rentInfo": [
+                    {
+                        "rentOwner": "Krishna Giri",
+                        "annualIncome": 1000000,
+                        "occupation": "Driver",
+                        "contact": "1234567890",
+                        "address": "Shankhuwasava-5,khadbari",
+                        "totalMembers": 3,
+                        "maleMembers": 2,
+                        "femaleMembers": 1,
+                        "otherMembers": 0
+                    },
+                    {
+                        "rentOwner": "Ramesh Basnet",
+                        "annualIncome": 1500000,
+                        "occupation": "Auto Driver",
+                        "contact": "1234567890",
+                        "address": "khotang-5",
+                        "totalMembers": 3,
+                        "maleMembers": 2,
+                        "femaleMembers": 1,
+                        "otherMembers": 0
+                    }
+                ],
+                "type": 'population'
+            }
+        },
+        {
+            'type': 'Feature',
+            'id': 22,
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [87.279838, 26.816284],
+            },
+            'properties': {
+                "houseNumber": 16,
+                "name": 'Govinda Bahadur Rai',
+                "storey": 3,
+                "ownerOccupation": 'Business',
+                "annualIncome": 500000,
+                "contact": "982088396",
+                "address": "Chatara Line",
+                "totalMembers": 13,
+                "maleMembers": 8,
+                "femaleMembers": 4,
+                "otherMembers": 1,
+                "onRent": "yes",
+                "houseImage": "house2.jpg",
+                "rentInfo": [
+                    {
+                        "rentOwner": "Krishna Giri",
+                        "annualIncome": 1000000,
+                        "occupation": "Driver",
+                        "contact": "1234567890",
+                        "address": "Shankhuwasava-5,khadbari",
+                        "totalMembers": 3,
+                        "maleMembers": 2,
+                        "femaleMembers": 1,
+                        "otherMembers": 0
+                    },
+                    {
+                        "rentOwner": "Ramesh Basnet",
+                        "annualIncome": 1500000,
+                        "occupation": "Auto Driver",
+                        "contact": "1234567890",
+                        "address": "khotang-5",
+                        "totalMembers": 3,
+                        "maleMembers": 2,
+                        "femaleMembers": 1,
+                        "otherMembers": 0
+                    }
+                ],
+                "type": 'population'
+            }
+        },
         {
             'type': 'Feature',
             'id': 23,
             'geometry': {
                 'type': 'Point',
-                'coordinates': [87.282807, 26.816346],
+                'coordinates': [87.280269, 26.816231]
             },
             properties: {
-                "houseNumber": 15,
-                "name": 'Bishan Jung Rana',
+                "houseNumber": 17,
+                "name": 'Nirmal Rai',
                 "storey": 4,
                 "ownerOccupation": 'Business',
                 "annualIncome": 8000000,
@@ -548,7 +548,7 @@ const Dashboard = () => {
 
     const [houseHoldCount, setHouseHoldCount] = useState([]);
     const [mapViewStyle, setMapViewStyle] = useState('');
-
+    const [displayName, setDisplayName] = useState('Overall')
     const handleSearch = () => {
         const searchTerm = searchKeyword.toLowerCase()
         const searchedData = data.filter(item => (item.properties.name.toLowerCase()) === searchTerm)
@@ -835,10 +835,9 @@ const Dashboard = () => {
 
 
 
-    console.log("This is hover id", hoveredId)
+
     const searchTerm = searchKeyword.toLowerCase()
-    console.log("search term", searchTerm)
-    console.log("This data", data)
+
     const searchedData = data.filter(item => (item.properties.name.toLowerCase()) === searchTerm)
     useEffect(() => {
         const householdCount = data.filter(i => i.properties.type === 'population');
@@ -849,24 +848,56 @@ const Dashboard = () => {
         const filteredData = householdCount.filter((item, i) => (
             item.properties.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
         ));
-        console.log("This is filtered data", filteredData)
+
         setHouseHoldCount(filteredData)
 
     }
-    const mapView = [
-        {
-            name: 'General Map View',
-            style: 'mapbox://styles/nabanit/cl6cbna85000g14n3aj31u8m4'
-        },
-        {
-            name: 'Satellite Map View',
-            style: 'mapbox://styles/nabanit/cl6ai7jt2000114od7pyefvzt'
+
+    useEffect(() => {
+
+        switch (clickedButton) {
+            case 1:
+
+                setDisplayName('Overall')
+                break;
+
+            case 2:
+                setDisplayName('HouseHold')
+                break;
+
+            case 3:
+                setDisplayName('Health')
+                break;
+            case 4:
+                setDisplayName('Education')
+                break;
+            case 5:
+                setDisplayName('Finance')
+                break;
+            case 6:
+                setDisplayName('Communication')
+                break;
+            case 7:
+                setDisplayName('Governance')
+                break;
+            case 8:
+                setDisplayName('Hotel/Resturant')
+                break;
+            case 9:
+                setDisplayName('Cultural Heritage')
+                break;
+            case 10:
+                setDisplayName('Industries')
+                break;
+
+            default:
+                setDisplayName('Overall')
+                break;
         }
-    ]
+    }, [clickedButton])
 
 
 
-    console.log("This is searched Data", searchedData, searchKeyword, houseHoldCount)
     return (
         <div className='mainContainer' >
             <div className='sideBar' >
@@ -879,6 +910,15 @@ const Dashboard = () => {
                     houseHoldData={clickedButton === 2 ? true : false}
                     setClickedButton={setClickedButton}
                     clickedButton={clickedButton}
+                    finalTotalMaleCount={finalTotalMaleCount}
+                    finalTotalFemaleCount={finalTotalFemaleCount}
+                    finalTotalOtherCount={finalTotalOtherCount}
+                    totalPeopleOnHouse={totalPeopleOnHouse}
+                    totalPeopleOnRent={totalPeopleOnRent}
+                    displayName={displayName}
+
+
+
                 />
                 {
                     clickedButton === 1 && <InfrastructureGraph
@@ -889,7 +929,7 @@ const Dashboard = () => {
                 }
                 {
                     clickedButton !== 1 &&
-                    <div style={{ margin: '20px 0', display: 'flex', flexDirection: 'column', gap: '30px' }} >
+                    <div style={{ margin: '20px 0', display: 'flex', flexDirection: 'column', gap: '50px' }} >
                         <div>
                             <Form.Control
                                 type="text"

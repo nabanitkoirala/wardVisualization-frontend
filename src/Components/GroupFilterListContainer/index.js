@@ -41,7 +41,7 @@ const InfoBox = (props) => {
                     name='clickedButton'
                     type='radio'
                     id='Population'
-                    label='Population'
+                    label='Household'
                     value={2}
                     defaultChecked={clickedButton === 2 ? true : false}
                     onClick={() => {
