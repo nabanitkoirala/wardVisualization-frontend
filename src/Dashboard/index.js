@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Map from '../Components/DistrictSummary/Map'
+import Map from '../Components/Map'
 import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -15,7 +15,10 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import './styles.scss'
-import TableData from '../Components/DistrictSummary/TableData';
+import TableData from '../Components/TableData';
+import GroupFilterListContainer from '../Components/GroupFilterListContainer';
+import PopulationDistributionCount from '../Components/MinorComponents/populationDistributionCount';
+import InfrastructureGraph from '../Components/MinorComponents/InfrastructureGraph';
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -28,6 +31,7 @@ const Dashboard = () => {
     const [data, setData] = useState([
         {
             'type': 'Feature',
+            'id': 1,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.283353, 26.816517]
@@ -43,6 +47,39 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 2,
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [87.283353, 26.816517]
+            },
+            'properties': {
+                "name": 'Goroka Hospital',
+                "contactNumber": 12345,
+                "address": "dharan-12",
+                "houseImage": "house3.jpg",
+                "type": 'health'
+
+            }
+        },
+        {
+            'type': 'Feature',
+            'id': 3,
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [87.283353, 26.816517]
+            },
+            'properties': {
+                "name": 'Goroka Hospital',
+                "contactNumber": 12345,
+                "address": "dharan-12",
+                "houseImage": "house3.jpg",
+                "type": 'health'
+
+            }
+        },
+        {
+            'type': 'Feature',
+            'id': 4,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.285153, 26.816444],
@@ -57,6 +94,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 5,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.285040, 26.815397],
@@ -72,6 +110,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 6,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.283593, 26.815758],
@@ -87,6 +126,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 7,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.285004, 26.815421],
@@ -102,6 +142,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 8,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.279859, 26.816394],
@@ -117,6 +158,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 9,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.284443, 26.816281],
@@ -132,6 +174,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 10,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.283890, 26.815385],
@@ -147,6 +190,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 11,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.281845, 26.816449],
@@ -161,6 +205,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 12,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.281741, 26.816630],
@@ -175,6 +220,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 13,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.277400, 26.816167],
@@ -189,6 +235,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 14,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.278822, 26.815332],
@@ -203,6 +250,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 15,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.279390, 26.814655],
@@ -217,6 +265,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 16,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.281369, 26.814031],
@@ -231,6 +280,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 17,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.282886, 26.815184],
@@ -245,6 +295,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 18,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.283443, 26.815871],
@@ -259,6 +310,7 @@ const Dashboard = () => {
         },
         {
             'type': 'Feature',
+            'id': 19,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.283899, 26.816808],
@@ -293,55 +345,153 @@ const Dashboard = () => {
                 "type": 'population'
             }
         },
+        // {
+        //     'type': 'Feature',
+        //     'id': 20,
+        //     'geometry': {
+        //         'type': 'Point',
+        //         'coordinates': [87.283692, 26.816956],
+        //     },
+        //     'properties': {
+        //         "houseNumber": 14,
+        //         "name": 'Rajan Baniya',
+        //         "storey": 3,
+        //         "ownerOccupation": 'Business',
+        //         "annualIncome": 500000,
+        //         "contact": "982088396",
+        //         "address": "Chatara Line",
+        //         "totalMembers": 13,
+        //         "maleMembers": 8,
+        //         "femaleMembers": 4,
+        //         "otherMembers": 1,
+        //         "onRent": "yes",
+        //         "houseImage": "house2.jpg",
+        //         "rentInfo": [
+        //             {
+        //                 "rentOwner": "Krishna Giri",
+        //                 "annualIncome": 1000000,
+        //                 "occupation": "Driver",
+        //                 "contact": "1234567890",
+        //                 "address": "Shankhuwasava-5,khadbari",
+        //                 "totalMembers": 3,
+        //                 "maleMembers": 2,
+        //                 "femaleMembers": 1,
+        //                 "otherMembers": 0
+        //             },
+        //             {
+        //                 "rentOwner": "Ramesh Basnet",
+        //                 "annualIncome": 1500000,
+        //                 "occupation": "Auto Driver",
+        //                 "contact": "1234567890",
+        //                 "address": "khotang-5",
+        //                 "totalMembers": 3,
+        //                 "maleMembers": 2,
+        //                 "femaleMembers": 1,
+        //                 "otherMembers": 0
+        //             }
+        //         ],
+        //         "type": 'population'
+        //     }
+        // },
+        // {
+        //     'type': 'Feature',
+        //     'id': 21,
+        //     'geometry': {
+        //         'type': 'Point',
+        //         'coordinates': [87.283692, 26.816956],
+        //     },
+        //     'properties': {
+        //         "houseNumber": 14,
+        //         "name": 'Rajan Baniya',
+        //         "storey": 3,
+        //         "ownerOccupation": 'Business',
+        //         "annualIncome": 500000,
+        //         "contact": "982088396",
+        //         "address": "Chatara Line",
+        //         "totalMembers": 13,
+        //         "maleMembers": 8,
+        //         "femaleMembers": 4,
+        //         "otherMembers": 1,
+        //         "onRent": "yes",
+        //         "houseImage": "house2.jpg",
+        //         "rentInfo": [
+        //             {
+        //                 "rentOwner": "Krishna Giri",
+        //                 "annualIncome": 1000000,
+        //                 "occupation": "Driver",
+        //                 "contact": "1234567890",
+        //                 "address": "Shankhuwasava-5,khadbari",
+        //                 "totalMembers": 3,
+        //                 "maleMembers": 2,
+        //                 "femaleMembers": 1,
+        //                 "otherMembers": 0
+        //             },
+        //             {
+        //                 "rentOwner": "Ramesh Basnet",
+        //                 "annualIncome": 1500000,
+        //                 "occupation": "Auto Driver",
+        //                 "contact": "1234567890",
+        //                 "address": "khotang-5",
+        //                 "totalMembers": 3,
+        //                 "maleMembers": 2,
+        //                 "femaleMembers": 1,
+        //                 "otherMembers": 0
+        //             }
+        //         ],
+        //         "type": 'population'
+        //     }
+        // },
+        // {
+        //     'type': 'Feature',
+        //     'id': 22,
+        //     'geometry': {
+        //         'type': 'Point',
+        //         'coordinates': [87.283692, 26.816956],
+        //     },
+        //     'properties': {
+        //         "houseNumber": 14,
+        //         "name": 'Rajan Baniya',
+        //         "storey": 3,
+        //         "ownerOccupation": 'Business',
+        //         "annualIncome": 500000,
+        //         "contact": "982088396",
+        //         "address": "Chatara Line",
+        //         "totalMembers": 13,
+        //         "maleMembers": 8,
+        //         "femaleMembers": 4,
+        //         "otherMembers": 1,
+        //         "onRent": "yes",
+        //         "houseImage": "house2.jpg",
+        //         "rentInfo": [
+        //             {
+        //                 "rentOwner": "Krishna Giri",
+        //                 "annualIncome": 1000000,
+        //                 "occupation": "Driver",
+        //                 "contact": "1234567890",
+        //                 "address": "Shankhuwasava-5,khadbari",
+        //                 "totalMembers": 3,
+        //                 "maleMembers": 2,
+        //                 "femaleMembers": 1,
+        //                 "otherMembers": 0
+        //             },
+        //             {
+        //                 "rentOwner": "Ramesh Basnet",
+        //                 "annualIncome": 1500000,
+        //                 "occupation": "Auto Driver",
+        //                 "contact": "1234567890",
+        //                 "address": "khotang-5",
+        //                 "totalMembers": 3,
+        //                 "maleMembers": 2,
+        //                 "femaleMembers": 1,
+        //                 "otherMembers": 0
+        //             }
+        //         ],
+        //         "type": 'population'
+        //     }
+        // },
         {
             'type': 'Feature',
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.283692, 26.816956],
-            },
-            'properties': {
-                "houseNumber": 14,
-                "name": 'Rajan Baniya',
-                "storey": 3,
-                "ownerOccupation": 'Business',
-                "annualIncome": 500000,
-                "contact": "982088396",
-                "address": "Chatara Line",
-                "totalMembers": 13,
-                "maleMembers": 8,
-                "femaleMembers": 4,
-                "otherMembers": 1,
-                "onRent": "yes",
-                "houseImage": "house2.jpg",
-                "rentInfo": [
-                    {
-                        "rentOwner": "Krishna Giri",
-                        "annualIncome": 1000000,
-                        "occupation": "Driver",
-                        "contact": "1234567890",
-                        "address": "Shankhuwasava-5,khadbari",
-                        "totalMembers": 3,
-                        "maleMembers": 2,
-                        "femaleMembers": 1,
-                        "otherMembers": 0
-                    },
-                    {
-                        "rentOwner": "Ramesh Basnet",
-                        "annualIncome": 1500000,
-                        "occupation": "Auto Driver",
-                        "contact": "1234567890",
-                        "address": "khotang-5",
-                        "totalMembers": 3,
-                        "maleMembers": 2,
-                        "femaleMembers": 1,
-                        "otherMembers": 0
-                    }
-                ],
-                "type": 'population'
-            }
-        },
-        {
-            'type': 'Feature',
+            'id': 23,
             'geometry': {
                 'type': 'Point',
                 'coordinates': [87.282807, 26.816346],
@@ -394,6 +544,10 @@ const Dashboard = () => {
     const [searchError, setSearchError] = useState(false)
     const [searchKeyword, setSearchKeyword] = useState('');
     const [flyCoordinate, setFlyCoordinate] = useState([]);
+    const [hoveredId, setHoveredId] = useState(null);
+
+    const [houseHoldCount, setHouseHoldCount] = useState([]);
+    const [mapViewStyle, setMapViewStyle] = useState('');
 
     const handleSearch = () => {
         const searchTerm = searchKeyword.toLowerCase()
@@ -501,6 +655,58 @@ const Dashboard = () => {
     const totalCulture = data.filter(i => i.properties.type === 'culture');
     const totalIndustries = data.filter(i => i.properties.type === 'industry');
 
+
+
+    const overallFinalData = [
+        {
+            name: 'Household',
+            value: totalHouseHold,
+            color: '#FFA500'
+        },
+        {
+            name: 'Health',
+            value: totalHealthInstitution.length,
+            color: '#E5E5E5'
+        },
+        {
+            name: 'Education',
+            value: totalEducationalInstitution.length,
+            color: '#A0C5E8'
+        },
+        {
+            name: 'Finance',
+            value: totalFinancialInstitution.length,
+            color: '#E5E5E5'
+        },
+        {
+            name: 'Communication',
+            value: totalCommunication.length,
+            color: '#17A2FF'
+        },
+        {
+            name: 'Governance',
+            value: totalGovernance.length,
+            color: '#F54100'
+        },
+        {
+            name: 'Hotel/Resturant',
+            value: totalHotel.length,
+            color: '#000000'
+        },
+        {
+            name: 'Cultural Heritage',
+            value: totalCulture.length,
+            color: '#1F9F59'
+        },
+        {
+            name: 'Industries',
+            value: totalIndustries.length,
+            color: '#CA6F00'
+        }
+    ]
+    const totalDataCount = overallFinalData.reduce(function (previousValue, currentValue) {
+        return previousValue + currentValue.value
+    }, 0)
 
     const OverallData = {
         labels: ['Household',
@@ -628,354 +834,129 @@ const Dashboard = () => {
     }
 
 
+
+    console.log("This is hover id", hoveredId)
+    const searchTerm = searchKeyword.toLowerCase()
+    console.log("search term", searchTerm)
+    console.log("This data", data)
+    const searchedData = data.filter(item => (item.properties.name.toLowerCase()) === searchTerm)
+    useEffect(() => {
+        const householdCount = data.filter(i => i.properties.type === 'population');
+        setHouseHoldCount(householdCount)
+    }, [])
+    const handleChangeSearch = (value) => {
+        const householdCount = data.filter(i => i.properties.type === 'population');
+        const filteredData = householdCount.filter((item, i) => (
+            item.properties.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        ));
+        console.log("This is filtered data", filteredData)
+        setHouseHoldCount(filteredData)
+
+    }
+    const mapView = [
+        {
+            name: 'General Map View',
+            style: 'mapbox://styles/nabanit/cl6cbna85000g14n3aj31u8m4'
+        },
+        {
+            name: 'Satellite Map View',
+            style: 'mapbox://styles/nabanit/cl6ai7jt2000114od7pyefvzt'
+        }
+    ]
+
+
+
+    console.log("This is searched Data", searchedData, searchKeyword, houseHoldCount)
     return (
         <div className='mainContainer' >
             <div className='sideBar' >
-                <div style={{ height: '50px', backgroundColor: 'white', position: 'sticky', top: '0' }} >Dharn 12</div>
-                {clickedButton === 1 ? <>
-                    <Bar
-                        data={OverallData}
-                        options={{
-                            indexAxis: 'y',
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    position: 'right',
-                                    display: false
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Overall Household & Institution Information',
-                                },
-                            },
-                            layout: {
-                                padding: 10,
-                            },
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true,
-                                        fontColor: 'white'
-                                    },
-                                }],
-                                xAxes: [{
-                                    ticks: {
-                                        fontColor: 'white'
-                                    },
-                                }]
-                            }
-                        }}
-                        width={800} height={600}
+                <div style={{ height: '100px', backgroundColor: 'white', position: 'sticky', top: '0', borderBottom: '1px solid gainsboro' }} >Dharn 12
+
+                </div>
+
+                <PopulationDistributionCount
+                    overallData={clickedButton === 1 ? true : false}
+                    houseHoldData={clickedButton === 2 ? true : false}
+                    setClickedButton={setClickedButton}
+                    clickedButton={clickedButton}
+                />
+                {
+                    clickedButton === 1 && <InfrastructureGraph
+                        data={overallFinalData}
+
                     />
-                    <Bar
-                        data={PopulationDistribution}
-                        options={{
-                            indexAxis: 'y',
-                            responsive: true,
-                            layout: {
-                                padding: 10
-                            },
-                            plugins: {
-                                legend: {
-                                    position: 'right',
-                                    display: false
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Overall Information',
-                                },
-                            },
 
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true,
-                                        fontColor: 'white'
-                                    },
-                                }],
-                                xAxes: [{
-                                    ticks: {
-                                        fontColor: 'white'
-                                    },
-                                }]
-                            }
-                        }}
-                        width={800} height={600}
-                    /></> : ''}
-                {clickedButton === 2 ?
-                    <Bar
-                        data={rentAndHousePeopleGraph}
-                        options={{
-                            indexAxis: 'y',
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    position: 'right',
-                                    display: false
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Overall Household & Institution Information',
-                                },
-                            },
-                            layout: {
-                                padding: 10,
-                            },
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true,
-                                        fontColor: 'white'
-                                    },
-                                }],
-                                xAxes: [{
-                                    ticks: {
-                                        fontColor: 'white'
-                                    },
-                                }]
-                            }
-                        }}
-                        width={800} height={600}
-                    /> : ''
                 }
-                {clickedButton === 1 ?
-                    <div className='data-count' >
+                {
+                    clickedButton !== 1 &&
+                    <div style={{ margin: '20px 0', display: 'flex', flexDirection: 'column', gap: '30px' }} >
                         <div>
+                            <Form.Control
+                                type="text"
+                                id="inputPassword5"
+                                aria-describedby="passwordHelpBlock"
+                                placeholder='Search by Name'
+                                value={searchKeyword}
+                                size='md'
+                                onChange={(e) => {
+                                    setSearchError(false)
+                                    setSearchKeyword(e.target.value)
+                                    handleChangeSearch(e.target.value)
+                                }}
 
-                            <h2>Data Count</h2>
+                            />
+
+                            {searchError ? <Form.Text id="passwordHelpBlock"
+                                style={{ position: 'absolute', color: 'red' }} >
+                                Cannot find the name of your search value
+                            </Form.Text> : ''}
                         </div>
-                        <div style={{ display: 'flex' }} >
-                            <span style={{ width: '70%', fontSize: '20px' }} >Population:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalPopulation}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Male:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{finalTotalMaleCount}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Female:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{finalTotalFemaleCount}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Other:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{finalTotalOtherCount}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Household:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalHouseHold}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Health Institution:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalHealthInstitution.length}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Educational Institution:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalEducationalInstitution.length}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Financial Institution:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalFinancialInstitution.length}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Communication:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalCommunication.length}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Government Bodies:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalGovernance.length}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Hotel/Resturant:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalHotel.length}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Cultural Heritage:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalCulture.length}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>Industries:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalIndustries.length}</span>
-                        </div>
-                    </div> : ''
+                        {
+                            houseHoldCount.map((item) => (
+                                <div onMouseEnter={() => setHoveredId(item.id)}
+                                    onMouseLeave={() => setHoveredId(null)}
+                                    onClick={() => setFlyCoordinate(item.geometry.coordinates)}
+                                    style={{ display: 'flex', padding: '20px 0', borderBottom: '1px solid gainsboro', cursor: 'pointer' }}
+                                    key={item.id}
+                                >
+                                    <img src='/house1.jpg' alt="house" height={100} />
+                                    <div style={{ margin: '0 20px' }} >
+                                        <span>{`${item.properties.name}'s Residency`}</span>
+                                        <div>
+                                            <span>{item.properties.address}</span>
+                                            <span style={{ marginLeft: '5px' }} >{`House Number ${item.properties.houseNumber}`}</span>
+                                        </div>
+                                        <div>
+                                            <span>Storey:{item.properties.storey}</span>
+                                            <span style={{ marginLeft: '5px' }}>on Rent:{item.properties.rentInfo.length}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            ))
+                        }
+
+
+                    </div>
                 }
-                {clickedButton === 2 ?
-                    <div className='data-count' >
-                        <div>
 
-                            <h2>Data Count</h2>
-                        </div>
-                        <div style={{ display: 'flex' }} >
-                            <span style={{ width: '70%', fontSize: '20px' }} >People With House:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalPeopleOnHouse}</span>
-                        </div>
-                        <div style={{ display: 'flex' }}>
-                            <span style={{ width: '70%', fontSize: '20px' }}>People on Rent:</span>
-                            <span style={{ width: '30%', fontSize: '20px' }}>{totalPeopleOnRent}</span>
-                        </div>
-
-                    </div> : ''
-                }
-                {clickedButton === 3 ? <TableData title="Health Infrastructure"
-                    data={totalHealthInstitution} /> : ''}
-                {clickedButton === 4 ? <TableData title="Educational Institutions"
-                    data={totalEducationalInstitution} /> : ''}
-                {clickedButton === 5 ? <TableData title="Financial Institutions"
-                    data={totalFinancialInstitution} /> : ''}
-                {clickedButton === 6 ? <TableData title="Communication"
-                    data={totalCommunication}
-                /> : ''}
-                {clickedButton === 7 ? <TableData title="Government Institution"
-                    data={totalGovernance}
-                /> : ''}
-                {clickedButton === 8 ? <TableData title="Hotel/Resturant"
-                    data={totalHotel}
-                /> : ''}
-                {clickedButton === 9 ? <TableData title="Cultural Heritage"
-                    data={totalCulture}
-                /> : ''}
-                {clickedButton === 10 ? <TableData title="Industries"
-                    data={totalIndustries}
-                /> : ''}
             </div>
             <div className='mapContainer' >
-                <div className="mapFilter">
-                    <DropdownButton
-                        id="dropdown-button-dark-example2"
-                        variant="secondary"
-                        menuVariant="dark"
-                        title={selectedMapView}
-                        className="mr-2"
 
-                    >
-                        <Dropdown.Item onClick={() => {
-                            setSelectedMapView('General Map View')
-                            setChangedMapView(true)
-                        }} >General Map View</Dropdown.Item>
-                        <Dropdown.Item onClick={() => {
-                            setSelectedMapView('Satellite Map View')
-                            setChangedMapView(true)
-                        }} >Satellite Map View</Dropdown.Item>
-
-                    </DropdownButton>
-                    <div>
-                        <Form.Control
-                            type="text"
-                            id="inputPassword5"
-                            aria-describedby="passwordHelpBlock"
-                            placeholder='Search by Name'
-                            value={searchKeyword}
-                            size='md'
-                            onChange={(e) => {
-                                setSearchError(false)
-                                setSearchKeyword(e.target.value)
-                            }}
-
-                        />
-
-                        {searchError ? <Form.Text id="passwordHelpBlock"
-                            style={{ position: 'absolute', color: 'red' }} >
-                            Cannot find the name of your search value
-                        </Form.Text> : ''}
-                    </div>
-                    <Button variant="light" className="ml-2" onClick={handleSearch} disabled={!searchKeyword} >Search</Button>{' '}
-                </div>
-                <Map data={data}
+                <Map
+                    data={data}
                     clickedButton={clickedButton}
                     selectedMapView={selectedMapView}
                     changedMapView={changedMapView}
                     setChangedMapView={setChangedMapView}
                     flyCoordinate={flyCoordinate}
                     setFlyCoordinate={setFlyCoordinate}
+                    hoveredId={hoveredId}
+                    mapViewStyle={mapViewStyle}
                 />
-                <div className='checkboxes' >
-                    <div style={{ margin: '10px' }} >
-                        <Form.Check
-                            type='radio'
-                            id='Overall'
-                            label='Overall'
-                            name='clickedButton'
-                            value={1}
-                            defaultChecked
-                            onClick={() => setClickedButton(1)}
 
-                        />
-                        <Form.Check
-                            name='clickedButton'
-                            type='radio'
-                            id='Population'
-                            label='Population'
-                            value={2}
-                            onClick={() => setClickedButton(2)}
-                        />
-                        <Form.Check
-                            name='clickedButton'
-                            type='radio'
-                            id='Health'
-                            label='Health'
-                            value={3}
-                            onClick={() => setClickedButton(3)}
-                        />
-                        <Form.Check
-                            name='clickedButton'
-                            type='radio'
-                            id='Education'
-                            label='Education'
-                            value={4}
-                            onClick={() => setClickedButton(4)}
-                        />
-                        <Form.Check
-                            name='clickedButton'
-                            type='radio'
-                            id='Banking'
-                            label='Financial Institution'
-                            value={5}
-                            onClick={() => setClickedButton(5)}
-                        />
-                        <Form.Check
-                            name='clickedButton'
-                            type='radio'
-                            id='Communication'
-                            label='Communication'
-                            value={6}
-                            onClick={() => setClickedButton(6)}
-                        />
-                        <Form.Check
-                            name='clickedButton'
-                            type='radio'
-                            id='Governance'
-                            label='Government Institutions'
-                            value={7}
-                            onClick={() => setClickedButton(7)}
-                        />
-                        <Form.Check
-                            name='clickedButton'
-                            type='radio'
-                            id='Hotels'
-                            label='Hotel/Restaurant'
-                            value={8}
-                            onClick={() => setClickedButton(8)}
-                        />
-                        <Form.Check
-                            name='clickedButton'
-                            type='radio'
-                            id='Culture'
-                            label='Culture'
-                            value={9}
-                            onClick={() => setClickedButton(9)}
-                        />
-                        <Form.Check
-                            name='clickedButton'
-                            type='radio'
-                            id='Industries'
-                            label='Industries'
-                            value={10}
-                            onClick={() => setClickedButton(10)}
-                        />
-
-                    </div>
-                </div>
             </div>
-        </div>
+        </div >
     )
 }
 
