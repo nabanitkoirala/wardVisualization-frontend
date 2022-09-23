@@ -337,7 +337,7 @@ const Map = ({ datas, data, clickedButton,
             });
             map.on('click', 'population', function (e) {
 
-                const popupOverall = `<div class=main-div><div class=popup-heading ><strong>Information</strong></div>
+                const popupOverall = `<div class=main-div><div><div class="rent-status">on rent</div><img src=${e.features[0].properties.houseImage} alt="house pic"/></div><div class=popup-heading ><strong>Information</strong></div>
                             <div class=popup-Data><div class=name-value ><p><b>Household Information</b></p></div>
                             <div class=popup-Data><div class=name-value ><p>House Number:</p><p>${e.features[0].properties.houseNumber}</p></div>
                             <div class=popup-Data><div class=name-value ><p>Owner Name:</p><p>${e.features[0].properties.name}</p></div>
