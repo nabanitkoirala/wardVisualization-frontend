@@ -15,16 +15,41 @@
 .name-value {
     display: flex;
     justify-content: space-between;
-    margin: 5px;
+    // margin: 5px;
+
+    .key {
+        font-weight: bold;
+        opacity: 0.9;
+    }
+
+    .value {
+        font-weight: 100;
+        opacity: 0.67;
+    }
 
     p {
         margin-bottom: 0px;
+
     }
 }
 
 .popup-Data {
     margin-top: 10px;
     color: black;
+
+    .rent-owner-name {
+        margin: 10px 0;
+        opacity: 0.9;
+    }
+
+    .owner-address {
+        margin: 10px 0;
+        opacity: 0.67;
+        font-size: 14px;
+        font-weight: 100;
+
+
+    }
 
     // margin-left: 20px;
     // margin-right: 20px;
@@ -33,9 +58,10 @@
         padding-bottom: 5px;
         // width: 320px;
         margin-top: 20px;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
         padding-top: 20px;
-        padding-bottom: 20px;
+        // padding-bottom: 20px;
+        font-size: 20px;
     }
 
 }
@@ -49,7 +75,7 @@
 
 .main-div {
     height: 500px;
-
+    margin-bottom: 20px;
     overflow-y: scroll;
     overflow-x: hidden;
 
@@ -88,6 +114,33 @@
     margin-right: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
+
+    .owner-name {
+        margin: 10px 0;
+        opacity: 0.9;
+    }
+
+    .owner-address {
+        margin: 10px 0;
+        opacity: 0.67;
+        font-size: 14px;
+        font-weight: 100;
+
+
+    }
+
+    .owner-detail {
+        display: flex;
+        opacity: 0.67;
+        font-size: 14px;
+        font-weight: 100;
+        justify-content: space-between;
+
+        .house-member-info {
+            font-weight: bold;
+            opacity: 1;
+        }
+    }
 
 }
 

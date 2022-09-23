@@ -12,8 +12,8 @@ const InfrastructureGraph = ({ data }) => {
         data.map((item) => (
             <div style={{ margin: '10px 0' }} key={item.name}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }} >
-                    <span>{item.name}</span>
-                    <span>{item.value}</span>
+                    <span style={{ fontWeight: 'bold', fontSize: '16px', opacity: '0.67' }} >{item.name.toUpperCase()}</span>
+                    <span style={{ fontSize: '16px', opacity: '0.67' }}>{item.value}</span>
                 </div>
                 <div style={{ height: '20px', backgroundColor: `${item.color}`, width: barPercentageCalculation(item.value), borderRadius: '5px' }} ></div>
             </div>
