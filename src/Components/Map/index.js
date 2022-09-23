@@ -347,35 +347,35 @@ const Map = ({ datas, data, clickedButton,
                 </div>
                 
                 </div>
-                            <div class=popup-Data-maindiv><div class=name-value ><p><b>Household Information</b></p></div>
-                            <div class=popup-Data><div class=name-value ><p>House Number:</p><p>${e.features[0].properties.houseNumber}</p></div>
-                            <div class=popup-Data><div class=name-value ><p>Owner Name:</p><p>${e.features[0].properties.name}</p></div>
-                            <div class=popup-Data><div class=name-value ><p>storey:</p><p>${e.features[0].properties.storey}</p></div>
+                           
+                   <div class=data-container>         
+                <div class=popup-Data>
+                <div class=name-value >
+                <p>Contact:</p><p>${e.features[0].properties.contact}</p></div>
                             <div class=popup-Data><div class=name-value ><p>Owner Occupation:</p><p>${e.features[0].properties.ownerOccupation}</p></div>
-                            <div class=popup-Data><div class=name-value ><p>Annual Income:</p><p>${e.features[0].properties.annualIncome}</p></div>
-                            <div class=popup-Data><div class=name-value ><p>Contact:</p><p>${e.features[0].properties.contact}</p></div>
-                            <div class=popup-Data><div class=name-value ><p>Address:</p><p>${e.features[0].properties.address}</p></div>
-                            <div class=popup-Data><div class=name-value ><p>Total Members:</p><p>${e.features[0].properties.totalMembers}</p></div>
+                            <div class=popup-Data><div class=name-value ><p>Annual Income:</p><p>${e.features[0].properties.annualIncome}</p></div> 
                             <div class=popup-Data><div class=name-value ><p>Male Members:</p><p>${e.features[0].properties.maleMembers}</p></div>
                             <div class=popup-Data><div class=name-value ><p>Female Members:</p><p>${e.features[0].properties.femaleMembers}</p></div>
                             <div class=popup-Data><div class=name-value ><p>Other Members:</p><p>${e.features[0].properties.otherMembers}</p></div>
-                            <div class=popup-Data><div class=name-value ><p>onRent:</p><p>${e.features[0].properties.onRent}</p></div>
-                            ${JSON.parse(e.features[0].properties.rentInfo).length ? `<div class=popup-heading ><strong>Rent Information</strong></div>` : ''}
+                            <div>
+                            ${JSON.parse(e.features[0].properties.rentInfo).length ? `<div class=popup-heading-tenant ><strong>Tenant Information</strong></div>` : ''}
                             ${JSON.parse(e.features[0].properties.rentInfo).length ? JSON.parse(e.features[0].properties.rentInfo).map((item) => (
-                    // console.log("This map rent", item)
 
-                    `<div class=popup-Data><div class=name-value ><p>Rent Owner :</p><p>${item.rentOwner}</p></div>
+
+                    `
+                    <div><strong>Binod Giri</strong></div>
+                    <div>Shankhuwasava-04,Khadbari</div>
+                    <div class=popup-Data>
+                    
+                    <div class=popup-Data><div class=name-value ><p>Contact :</p><p>${item.contact}</p></div>
                                     <div class=popup-Data><div class=name-value ><p>Occupation :</p><p>${item.occupation}</p></div>
-                                    <div class=popup-Data><div class=name-value ><p>Contact :</p><p>${item.contact}</p></div>
-                                    <div class=popup-Data><div class=name-value ><p>Address :</p><p>${item.address}</p></div>
-                                    <div class=popup-Data><div class=name-value ><p>Total Members :</p><p>${item.totalMembers}</p></div>
                                     <div class=popup-Data><div class=name-value ><p>Male :</p><p>${item.maleMembers}</p></div>
                                     <div class=popup-Data><div class=name-value ><p>Female :</p><p>${item.femaleMembers}</p></div>
-                                    <div class=popup-Data><div class=name-value ><p>Other :</p><p>${item.otherMembers}</p></div>`
+                                    <div class=popup-Data><div class=name-value ><p>Other :</p><p>${item.otherMembers}</p></div>
+                                    `
 
                 )) : ''}
-                            <div class=popup-heading ><strong>House Image</strong></div>
-                            <img src=${e.features[0].properties.houseImage} alt="house pic"/>
+                            
                             </div></div>`
                 popup.setLngLat([e.lngLat.lng, e.lngLat.lat]).setHTML(popupOverall).addTo(map);
             })
