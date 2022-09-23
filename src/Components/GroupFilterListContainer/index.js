@@ -25,6 +25,7 @@ const InfoBox = (props) => {
         <div ref={ref} className='container' >
             <div style={{ margin: '10px' }} >
                 <Form.Check
+                    style={{ cursor: 'pointer' }}
                     type='radio'
                     id='Overall'
                     label='Overall'
@@ -38,6 +39,7 @@ const InfoBox = (props) => {
 
                 />
                 <Form.Check
+                    style={{ cursor: 'pointer' }}
                     name='clickedButton'
                     type='radio'
                     id='Population'
@@ -50,6 +52,7 @@ const InfoBox = (props) => {
                     }}
                 />
                 <Form.Check
+                    style={{ cursor: 'pointer' }}
                     name='clickedButton'
                     type='radio'
                     id='Health'
@@ -62,6 +65,7 @@ const InfoBox = (props) => {
                     }}
                 />
                 <Form.Check
+                    style={{ cursor: 'pointer' }}
                     name='clickedButton'
                     type='radio'
                     id='Education'
@@ -74,6 +78,7 @@ const InfoBox = (props) => {
                     }}
                 />
                 <Form.Check
+                    style={{ cursor: 'pointer' }}
                     name='clickedButton'
                     type='radio'
                     id='Banking'
@@ -86,6 +91,7 @@ const InfoBox = (props) => {
                     }}
                 />
                 <Form.Check
+                    style={{ cursor: 'pointer' }}
                     name='clickedButton'
                     type='radio'
                     id='Communication'
@@ -98,6 +104,7 @@ const InfoBox = (props) => {
                     }}
                 />
                 <Form.Check
+                    style={{ cursor: 'pointer' }}
                     name='clickedButton'
                     type='radio'
                     id='Governance'
@@ -110,6 +117,7 @@ const InfoBox = (props) => {
                     }}
                 />
                 <Form.Check
+                    style={{ cursor: 'pointer' }}
                     name='clickedButton'
                     type='radio'
                     id='Hotels'
@@ -122,6 +130,7 @@ const InfoBox = (props) => {
                     }}
                 />
                 <Form.Check
+                    style={{ cursor: 'pointer' }}
                     name='clickedButton'
                     type='radio'
                     id='Culture'
@@ -134,6 +143,7 @@ const InfoBox = (props) => {
                     }}
                 />
                 <Form.Check
+                    style={{ cursor: 'pointer' }}
                     name='clickedButton'
                     type='radio'
                     id='Industries'

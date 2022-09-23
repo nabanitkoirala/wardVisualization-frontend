@@ -362,6 +362,7 @@ const Map = ({ datas, data, clickedButton,
                             ${JSON.parse(e.features[0].properties.rentInfo).length ? JSON.parse(e.features[0].properties.rentInfo).map((item) => (
 
                     `
+                    <div>
                     <div class=rent-owner-name ><strong>${item.rentOwner}</strong></div>
                     <div class=owner-address>${item.address}</div>
                     <div class=popup-Data>
@@ -371,6 +372,7 @@ const Map = ({ datas, data, clickedButton,
                                     <div class=popup-Data><div class=name-value ><p class=key>Male :</p><p class=value>${item.maleMembers}</p></div>
                                     <div class=popup-Data><div class=name-value ><p class=key>Female :</p><p class=value>${item.femaleMembers}</p></div>
                                     <div class=popup-Data><div class=name-value ><p class=key>Other :</p><p class=value>${item.otherMembers}</p></div>
+                                    </div>
                                     `
 
                 )) : ''
