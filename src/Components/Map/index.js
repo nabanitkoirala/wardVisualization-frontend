@@ -336,9 +336,18 @@ const Map = ({ datas, data, clickedButton,
                 hoveredWardId = undefined;
             });
             map.on('click', 'population', function (e) {
-
-                const popupOverall = `<div class=main-div><div><div class="rent-status">on rent</div><img src=${e.features[0].properties.houseImage} alt="house pic"/></div><div class=popup-heading ><strong>Information</strong></div>
-                            <div class=popup-Data><div class=name-value ><p><b>Household Information</b></p></div>
+                const popupOverall = `<div class=main-div><div class=image-rent-status ><div class="rent-status">on rent</div><img src=${e.features[0].properties.houseImage} alt="house pic"/></div>
+                <div class=popup-heading >
+                <div><strong>Bishal Jung Rana's Residence</strong></div>
+                <div>Chatara Line,Dharan-12</div>
+                <div>
+                <div>House No:15</div>
+                <div>Storeys:04</div>
+                <div>Total Members:14</div>
+                </div>
+                
+                </div>
+                            <div class=popup-Data-maindiv><div class=name-value ><p><b>Household Information</b></p></div>
                             <div class=popup-Data><div class=name-value ><p>House Number:</p><p>${e.features[0].properties.houseNumber}</p></div>
                             <div class=popup-Data><div class=name-value ><p>Owner Name:</p><p>${e.features[0].properties.name}</p></div>
                             <div class=popup-Data><div class=name-value ><p>storey:</p><p>${e.features[0].properties.storey}</p></div>
@@ -378,8 +387,6 @@ const Map = ({ datas, data, clickedButton,
         // if (!map) initializeMap({ setMap, mapContainer });
     }, [])
 
-
-
     useEffect(() => {
 
         if (mapRef.current && mapRef.current.isStyleLoaded()) {
@@ -391,7 +398,6 @@ const Map = ({ datas, data, clickedButton,
             }
 
         }
-
         return () => {
             if (mapRef.current && mapRef.current.isStyleLoaded()) {
                 mapRef.current.setPaintProperty('population', 'circle-opacity', [
@@ -408,11 +414,7 @@ const Map = ({ datas, data, clickedButton,
                 ])
             }
         }
-
-
     }, [hoveredId])
-
-
 
     useEffect(() => {
         if (mapRef.current && mapRef.current.isStyleLoaded()) {
