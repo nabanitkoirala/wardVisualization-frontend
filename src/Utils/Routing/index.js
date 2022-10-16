@@ -1,19 +1,57 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Link,
+    Navigate,
+    useParams,
+} from 'react-router-dom';
+import LandingPage from '../../admin/LandingPage';
+import Login from '../../admin/Login';
 import Dashboard from '../../Dashboard/index';
 
+
+
+
+
+function PrivateRoute({ children }) {
+    const auth = localStorage.getItem("UserLoginInformation");
+    return auth ? children : <Navigate to="/login" />;
+}
+const PublicRoute = ({ children }) => {
+    const auth = localStorage.getItem("UserLoginInformation");
+    return auth ? <Navigate to="/dashboard" /> : children;
+};
+
+
 const Routing = () => {
+
     return (
-        <div style={{ height: '100vh' }} >
+        <BrowserRouter>
 
-            <Router>
+            <Routes>
                 {/* <TopNavbar /> */}
-                <Switch>
-                    <Route exact path="/" component={Dashboard} />
-                </Switch>
-            </Router>
 
-        </div>
+                <Route exact path="/" element={
+
+                    <Dashboard />
+
+                } />
+                <Route path="/login" element={
+                    <PublicRoute>
+                        <Login />
+                    </PublicRoute>
+                } />
+                <Route path="/dashboard" element={
+                    <PrivateRoute>
+                        <LandingPage />
+                    </PrivateRoute>
+                } />
+
+            </Routes>
+
+        </BrowserRouter>
 
     )
 }
