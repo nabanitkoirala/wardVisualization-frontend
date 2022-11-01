@@ -1,6 +1,8 @@
 /* eslint-disable import/no-anonymous-default-export */
+import { useContext } from 'react';
 import axios from 'axios';
 import CryptoJs from 'crypto-js';
+import { statusProgressContext } from '../Store';
 
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
@@ -39,12 +41,28 @@ function getHeaders(secure = false, multipart = false) {
     }
     return headers;
 }
-function post(url, data, isSecure, isMultipart) {
+function post(url, data, isSecure, isMultipart, setStatusProgress) {
+
     return https.post(
         url, data,
         {
-            headers: getHeaders(isSecure, isMultipart)
-        }
+            headers: getHeaders(isSecure, isMultipart),
+            onUploadProgress: (progressEvent) => {
+                const progress = (progressEvent.loaded / progressEvent.total) * 50;
+                console.log("This is progress", progressEvent.loaded)
+                console.log("This is output", progressEvent.total)
+                console.log("This is final progress", progress)
+                setStatusProgress(progress)
+
+            },
+            onDownloadProgress: (progressEvent) => {
+                const progress = 50 + (progressEvent.loaded / progressEvent.total) * 50;
+                console.log("Final test for ouptut", progress);
+                setStatusProgress(progress)
+
+            },
+        },
+
     )
 }
 function remove(url, isSecure) {

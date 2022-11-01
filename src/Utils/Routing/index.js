@@ -8,7 +8,7 @@ import {
     useParams,
 } from 'react-router-dom';
 import LandingPage from '../../admin/LandingPage';
-import Login from '../../admin/Login';
+import LoginPage from '../../admin/LoginPage';
 import Dashboard from '../../Dashboard/index';
 
 
@@ -40,7 +40,7 @@ const Routing = () => {
                 } />
                 <Route path="/login" element={
                     <PublicRoute>
-                        <Login />
+                        <LoginPage />
                     </PublicRoute>
                 } />
                 <Route path="/dashboard" element={

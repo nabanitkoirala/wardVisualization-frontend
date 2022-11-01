@@ -900,7 +900,7 @@ const Dashboard = () => {
 
 
     return (
-        <div className='mainContainer' >
+        <div className='mainContainers' >
             <div className='sideBar' >
                 <div style={{ height: '100px', backgroundColor: 'white', position: 'sticky', top: '0', borderBottom: '1px solid gainsboro', zIndex: 1 }} >Dharn 12
 
