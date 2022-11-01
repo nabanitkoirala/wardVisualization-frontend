@@ -910,7 +910,7 @@ const Dashboard = () => {
                         'id': index + 1,
                         'geometry': {
                             'type': 'Point',
-                            'coordinates': [Number(item.geometry.coordinates[1]), Number(item.geometry.coordinates[0])],
+                            'coordinates': [Number(item.geometry.coordinates[0]), Number(item.geometry.coordinates[1])],
                         },
                         'properties': {
                             "houseNumber": item.properties.houseNumber,
