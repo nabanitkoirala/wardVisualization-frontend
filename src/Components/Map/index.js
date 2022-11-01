@@ -25,7 +25,7 @@ const Map = ({ datas, data, clickedButton,
         ? 'mapbox://styles/nabanit/cl6ai7jt2000114od7pyefvzt'
         : 'mapbox://styles/nabanit/cl6cbna85000g14n3aj31u8m4'
 
-
+    console.log('Map data', data)
     useEffect(() => {
         if (flyCoordinate.length && mapRef.current && mapRef.current.isStyleLoaded()) {
 
