@@ -11,7 +11,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL
 
 const https = axios.create({
     // baseURL: BASE_URL,
-    baseURL: 'https://test-kobo.herokuapp.com',
+    baseURL: 'https://test-kobo.herokuapp.com/api/v1',
     responseType: "json"
 })
 
