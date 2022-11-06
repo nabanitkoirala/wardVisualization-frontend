@@ -30,7 +30,7 @@ function MyVerticallyCenteredModal(props) {
         handleChange, handleRentStatus,
         setRentMemberCount, rentMemberCount, handleRentDetails, handleImage,
         imageUpload,
-        handleSubmit, buildingImage } = props
+        handleSubmit, buildingImage, editDataClicked, handleUpdate } = props
 
     return (
         <Modal
@@ -198,6 +198,7 @@ function MyVerticallyCenteredModal(props) {
                                     })
                                     setRentMemberCount([...rentMemberCount, rentMemberCount.length])
                                 }} >Add</Button>
+
                             {rentMemberCount.map((item, index) => (
                                 <div key={item}>
                                     {index !== 0 &&
@@ -213,7 +214,7 @@ function MyVerticallyCenteredModal(props) {
                                             setRentMemberCount(rentMemberCount.filter(i => i !== item))
                                         }} >Remove</Button>}
                                     <p >{'Rent Info' + index}</p>
-                                    {console.log("data properties", data.properties.rentInfo)}
+                                    { }
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Rent Owner</Form.Label>
                                         <Form.Control
@@ -303,7 +304,7 @@ function MyVerticallyCenteredModal(props) {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" type="button" onClick={handleSubmit}>
+                <Button variant="primary" type="button" onClick={editDataClicked ? handleUpdate : handleSubmit}>
                     Submit
                 </Button>
                 <Button onClick={props.onHide}>Close</Button>
@@ -353,6 +354,7 @@ const LandingPage = () => {
 
     const [rentMemberCount, setRentMemberCount] = useState([0]);
     const [editDataClicked, setEditDataClicked] = useState(false)
+    const [editDataId, setEditDataId] = useState()
     // useEffect(() => {
     //     axios.get('http://localhost:5000/api/v1/dataCollection')
     //         .then(function (response) {
@@ -502,33 +504,120 @@ const LandingPage = () => {
         // console.log("This is final data", datas)
     }
 
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        const datas = { ...data, geometry: { ...data.geometry, coordinates: [coordinates.long, coordinates.lat] } }
+
+        console.log('Building image', buildingImage)
+
+
+        let form_data = {
+
+            "geometry": {
+                "type": "Point",
+                "coordinates": datas.geometry.coordinates
+            },
+            "properties": {
+                "houseNumber": datas.properties.houseNumber,
+                "name": datas.properties.name,
+                "storey": datas.properties.storey,
+                "ownerOccupation": datas.properties.ownerOccupation,
+                "annualIncome": datas.properties.annualIncome,
+                "contact": datas.properties.contact,
+                "address": datas.properties.address,
+                "totalMembers": datas.properties.totalMembers,
+                "maleMembers": datas.properties.maleMembers,
+                "femaleMembers": datas.properties.femaleMembers,
+                "otherMembers": datas.properties.otherMembers,
+                "onRent": datas.properties.onRent,
+                "buildingImage": buildingImage,
+                "rentInfo": datas.properties.rentInfo,
+                "type": "population",
+                "isDataVerified": false
+            }
+        }
+        // console.log("Form data", form_data)
+
+        // form_data.properties['buildingImage'] = buildingImage;
+        // form_data.append('geometry', 'salkdhlashdl')
+        // form_data.append('properties', datas.properties)
+
+        // await axios.post('http://localhost:5000/api/v1/dataCollection', form_data, {
+        //     headers: {
+        //         'content-type': 'multipart/form-data'
+        //     }
+        // })
+        http.put(`/dataCollection/${editDataId}`, form_data, true, true, setStatusProgress)
+            .then(res => {
+
+                fetchData()
+                imageUpload.current.value = ""
+                setCoordinates({
+                    lat: '',
+                    long: ''
+                })
+                setRentMemberCount([0])
+                setBuildingImage(null)
+                setData({
+                    geometry: {
+                        type: 'Point',
+                        coordinates: []
+                    },
+                    properties: {
+                        houseNumber: "",
+                        name: "",
+                        storey: "",
+                        ownerOccupation: "",
+                        annualIncome: "",
+                        contact: "",
+                        address: "",
+                        totalMembers: "",
+                        maleMembers: "",
+                        femaleMembers: "",
+                        otherMembers: "",
+                        onRent: false,
+                        rentInfo: [],
+                        type: 'Population',
+                        isDataVerified: false
+
+                    }
+                })
+
+            })
+            .catch(err => console.log("This is error", err))
+
+        // console.log("This is final data", datas)
+    }
+
 
 
     useEffect(() => {
-        if (data.properties.onRent) {
-            setData({
-                ...data, properties: {
-                    ...data.properties,
-                    rentInfo: [{
-                        "rentOwner": "",
-                        "annualIncome": "",
-                        "occupation": "",
-                        "contact": "",
-                        "address": "",
-                        "totalMembers": "",
-                        "maleMembers": "",
-                        "femaleMembers": "",
-                        "otherMembers": ""
-                    }]
-                }
-            })
-        } else {
-            setData({
-                ...data, properties: {
-                    ...data.properties,
-                    rentInfo: []
-                }
-            })
+        if (!editDataClicked) {
+            if (data.properties.onRent) {
+                setData({
+                    ...data, properties: {
+                        ...data.properties,
+                        rentInfo: [{
+                            "rentOwner": "",
+                            "annualIncome": "",
+                            "occupation": "",
+                            "contact": "",
+                            "address": "",
+                            "totalMembers": "",
+                            "maleMembers": "",
+                            "femaleMembers": "",
+                            "otherMembers": ""
+                        }]
+                    }
+                })
+            } else {
+                setData({
+                    ...data, properties: {
+                        ...data.properties,
+                        rentInfo: []
+                    }
+                })
+            }
         }
     }, [data.properties.onRent])
 
@@ -584,13 +673,15 @@ const LandingPage = () => {
         })
     }
     const handleDataEditClick = (data) => {
+
+        setEditDataId(data._id)
         setEditDataClicked(true)
         setModalShow(true)
         setCoordinates({
             lat: data.geometry.coordinates[0],
             long: data.geometry.coordinates[1]
         })
-        console.log("This is final data", data)
+
         setData({
             geometry: {
                 type: 'Point',
@@ -598,14 +689,16 @@ const LandingPage = () => {
             },
             properties: data.properties
         })
+        let datas = [];
         for (let i = 0; i < data.properties.rentInfo.length; i++) {
-            const data = [];
-            data.push(i);
-            setRentMemberCount(data)
+            datas.push(i);
+
+            setRentMemberCount(datas)
         }
 
-    }
 
+    }
+    console.log("This is imageUpload.current.value", data)
     return (
         // <>
         //     <div>This is landing page</div>
@@ -744,7 +837,10 @@ const LandingPage = () => {
                     </Button>
                     <MyVerticallyCenteredModal
                         show={modalShow}
-                        onHide={() => setModalShow(false)}
+                        onHide={() => {
+                            setEditDataClicked(false)
+                            setModalShow(false)
+                        }}
                         coordinates={coordinates}
                         setCoordinates={setCoordinates}
                         data={data}
@@ -758,6 +854,9 @@ const LandingPage = () => {
                         handleSubmit={handleSubmit}
                         buildingImage={buildingImage}
                         imageUpload={imageUpload}
+                        handleUpdate={handleUpdate}
+                        editDataClicked={editDataClicked}
+
                     />
                     <div>
                         {showProgressBar ?

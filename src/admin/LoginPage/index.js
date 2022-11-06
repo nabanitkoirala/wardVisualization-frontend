@@ -50,8 +50,8 @@ const Login = () => {
     }
     console.log("This is user info available", userInfoAvailable)
     const handleLogin = () => {
-        // axios.post('http://localhost:5000/api/v1/auth/login', user)
-        axios.post('https://test-kobo.herokuapp.com/api/v1/auth/login', user)
+        axios.post('http://localhost:5000/api/v1/auth/login', user)
+            // axios.post('https://test-kobo.herokuapp.com/api/v1/auth/login', user)
             .then(function (res) {
                 const secretdata = CryptoJS.AES.encrypt(
                     res.data.token,
