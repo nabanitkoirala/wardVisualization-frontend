@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 const SearchAndListDetails = ({ searchKeyword, setSearchError, setSearchKeyword, handleChangeSearch,
     houseHoldCount, setHoveredId, setFlyCoordinate
 }) => {
+    console.log("Household count", houseHoldCount)
     return (
         <div style={{ margin: '20px 0', display: 'flex', flexDirection: 'column', gap: '50px' }} >
             <div>
@@ -36,16 +37,16 @@ const SearchAndListDetails = ({ searchKeyword, setSearchError, setSearchKeyword,
                         style={{ display: 'flex', padding: '20px 0', borderBottom: '1px solid gainsboro', cursor: 'pointer' }}
                         key={item.id}
                     >
-                        <img src='/house1.jpg' alt="house" height={100} />
+                        <img src='/house1.jpg' alt="house" height={100} style={{ borderRadius: '20px', objectFit: 'contain' }} />
                         <div style={{ margin: '0 20px' }} >
-                            <span>{`${item.properties.name}'s Residency`}</span>
+                            <span><strong>{`${item.properties.name}'s Residency`}</strong></span>
                             <div>
-                                <span>{item.properties.address}</span>
-                                <span style={{ marginLeft: '5px' }} >{`House Number ${item.properties.houseNumber}`}</span>
+                                <span style={{ fontWeight: '100', fontSize: '14px', opacity: '0.67' }} >{item.properties.address}</span>
+                                <span style={{ marginLeft: '5px', fontWeight: '100', fontSize: '14px', opacity: '0.67' }} >{`House No. ${item.properties.houseNumber}`}</span>
                             </div>
                             <div>
-                                <span>Storey:{item.properties.storey}</span>
-                                <span style={{ marginLeft: '5px' }}>on Rent:{item.properties.rentInfo.length}</span>
+                                <span><strong>Storey:</strong>{item.properties.storey}</span>
+                                <span style={{ marginLeft: '5px' }}><strong>on Rent:</strong>{item.properties.rentInfo.length}</span>
                             </div>
 
                         </div>

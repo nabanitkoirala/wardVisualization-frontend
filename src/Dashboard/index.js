@@ -30,517 +30,517 @@ ChartJS.register(
     Legend
 );
 const Dashboard = () => {
-    const [data, setData] = useState([
-        {
-            'type': 'Feature',
-            'id': 1,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.283353, 26.816517]
-            },
-            'properties': {
-                "name": 'Goroka Hospital',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'health'
+    // const [data, setData] = useState([
+    //     {
+    //         'type': 'Feature',
+    //         'id': 1,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.283353, 26.816517]
+    //         },
+    //         'properties': {
+    //             "name": 'Goroka Hospital',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'health'
 
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 2,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.283353, 26.816517]
-            },
-            'properties': {
-                "name": 'Goroka Hospital',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'health'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 2,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.283353, 26.816517]
+    //         },
+    //         'properties': {
+    //             "name": 'Goroka Hospital',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'health'
 
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 3,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.283353, 26.816517]
-            },
-            'properties': {
-                "name": 'Goroka Hospital',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'health'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 3,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.283353, 26.816517]
+    //         },
+    //         'properties': {
+    //             "name": 'Goroka Hospital',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'health'
 
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 4,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.285153, 26.816444],
-            },
-            'properties': {
-                "name": 'Kainantu hospital',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'health'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 5,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.285040, 26.815397],
-            },
-            'properties': {
-                "name": 'LOPI School',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'education'
-            }
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 4,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.285153, 26.816444],
+    //         },
+    //         'properties': {
+    //             "name": 'Kainantu hospital',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'health'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 5,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.285040, 26.815397],
+    //         },
+    //         'properties': {
+    //             "name": 'LOPI School',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'education'
+    //         }
 
-        },
-        {
-            'type': 'Feature',
-            'id': 6,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.283593, 26.815758],
-            },
-            'properties': {
-                "name": 'Saint Marry School',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'education'
-            }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 6,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.283593, 26.815758],
+    //         },
+    //         'properties': {
+    //             "name": 'Saint Marry School',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'education'
+    //         }
 
-        },
-        {
-            'type': 'Feature',
-            'id': 7,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.285004, 26.815421],
-            },
-            'properties': {
-                "name": 'Kumari Bank Ltd',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'finance'
-            }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 7,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.285004, 26.815421],
+    //         },
+    //         'properties': {
+    //             "name": 'Kumari Bank Ltd',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'finance'
+    //         }
 
-        },
-        {
-            'type': 'Feature',
-            'id': 8,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.279859, 26.816394],
-            },
-            'properties': {
-                "name": 'Prabhu Bank Limited',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'finance'
-            }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 8,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.279859, 26.816394],
+    //         },
+    //         'properties': {
+    //             "name": 'Prabhu Bank Limited',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'finance'
+    //         }
 
-        },
-        {
-            'type': 'Feature',
-            'id': 9,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.284443, 26.816281],
-            },
-            'properties': {
-                "name": 'Radio Nepal',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'communication'
-            }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 9,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.284443, 26.816281],
+    //         },
+    //         'properties': {
+    //             "name": 'Radio Nepal',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'communication'
+    //         }
 
-        },
-        {
-            'type': 'Feature',
-            'id': 10,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.283890, 26.815385],
-            },
-            'properties': {
-                "name": 'Radio Makalu',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'communication'
-            }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 10,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.283890, 26.815385],
+    //         },
+    //         'properties': {
+    //             "name": 'Radio Makalu',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'communication'
+    //         }
 
-        },
-        {
-            'type': 'Feature',
-            'id': 11,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.281845, 26.816449],
-            },
-            'properties': {
-                "name": 'Ward 12 office',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'governance'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 12,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.281741, 26.816630],
-            },
-            'properties': {
-                "name": 'Dharan Municipality',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'governance'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 13,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.277400, 26.816167],
-            },
-            'properties': {
-                "name": 'Star Hotel',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'hotel'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 14,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.278822, 26.815332],
-            },
-            'properties': {
-                "name": 'Zenith Hotel',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'hotel'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 15,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.279390, 26.814655],
-            },
-            'properties': {
-                "name": 'Shiva Mandir',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'culture'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 16,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.281369, 26.814031],
-            },
-            'properties': {
-                "name": 'Zame Maszid',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'culture'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 17,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.282886, 26.815184],
-            },
-            'properties': {
-                "name": 'Krishna Dhago Udhyog',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house2.jpg",
-                "type": 'industry'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 18,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.283443, 26.815871],
-            },
-            'properties': {
-                "name": 'Shiva Pauroti Udhyog',
-                "contactNumber": 12345,
-                "address": "dharan-12",
-                "houseImage": "house3.jpg",
-                "type": 'industry'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 19,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.283899, 26.816808],
-            },
-            'properties': {
-                "houseNumber": 13,
-                "name": 'Ram Kumar Thapa',
-                "storey": 3,
-                "ownerOccupation": 'Business',
-                "annualIncome": 500000,
-                "contact": "982088396",
-                "address": "Chatara Line",
-                "totalMembers": 13,
-                "maleMembers": 8,
-                "femaleMembers": 4,
-                "otherMembers": 1,
-                "onRent": "yes",
-                "houseImage": "house1.jpg",
-                "rentInfo": [
-                    {
-                        "rentOwner": "Samaya Wagle",
-                        "annualIncome": 3000000,
-                        "occupation": "Business",
-                        "contact": "1234567890",
-                        "address": "Dhankuta-5",
-                        "totalMembers": 5,
-                        "maleMembers": 2,
-                        "femaleMembers": 3,
-                        "otherMembers": 0
-                    }
-                ],
-                "type": 'population'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 20,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.279703, 26.816739],
-            },
-            'properties': {
-                "houseNumber": 14,
-                "name": 'Buddhi Bahadur Rai',
-                "storey": 3,
-                "ownerOccupation": 'Business',
-                "annualIncome": 500000,
-                "contact": "982088396",
-                "address": "Chatara Line",
-                "totalMembers": 13,
-                "maleMembers": 8,
-                "femaleMembers": 4,
-                "otherMembers": 1,
-                "onRent": "yes",
-                "houseImage": "house2.jpg",
-                "rentInfo": [
-                    {
-                        "rentOwner": "Gopal Giri",
-                        "annualIncome": 1000000,
-                        "occupation": "Driver",
-                        "contact": "1234567890",
-                        "address": "Shankhuwasava-5,khadbari",
-                        "totalMembers": 5,
-                        "maleMembers": 4,
-                        "femaleMembers": 1,
-                        "otherMembers": 0
-                    },
-                    {
-                        "rentOwner": "Ramesh Basnet",
-                        "annualIncome": 1500000,
-                        "occupation": "Auto Driver",
-                        "contact": "1234567890",
-                        "address": "khotang-5",
-                        "totalMembers": 3,
-                        "maleMembers": 2,
-                        "femaleMembers": 1,
-                        "otherMembers": 0
-                    }
-                ],
-                "type": 'population'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 21,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.280195, 26.816607]
-            },
-            'properties': {
-                "houseNumber": 15,
-                "name": 'Ramesh Jung Thapa',
-                "storey": 3,
-                "ownerOccupation": 'Business',
-                "annualIncome": 500000,
-                "contact": "982088396",
-                "address": "Chatara Line",
-                "totalMembers": 13,
-                "maleMembers": 8,
-                "femaleMembers": 4,
-                "otherMembers": 1,
-                "onRent": "yes",
-                "houseImage": "house2.jpg",
-                "rentInfo": [
-                    {
-                        "rentOwner": "Krishna Giri",
-                        "annualIncome": 1000000,
-                        "occupation": "Driver",
-                        "contact": "1234567890",
-                        "address": "Shankhuwasava-5,khadbari",
-                        "totalMembers": 3,
-                        "maleMembers": 2,
-                        "femaleMembers": 1,
-                        "otherMembers": 0
-                    },
-                    {
-                        "rentOwner": "Ramesh Basnet",
-                        "annualIncome": 1500000,
-                        "occupation": "Auto Driver",
-                        "contact": "1234567890",
-                        "address": "khotang-5",
-                        "totalMembers": 3,
-                        "maleMembers": 2,
-                        "femaleMembers": 1,
-                        "otherMembers": 0
-                    }
-                ],
-                "type": 'population'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 22,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.279838, 26.816284],
-            },
-            'properties': {
-                "houseNumber": 16,
-                "name": 'Govinda Bahadur Rai',
-                "storey": 3,
-                "ownerOccupation": 'Business',
-                "annualIncome": 500000,
-                "contact": "982088396",
-                "address": "Chatara Line",
-                "totalMembers": 13,
-                "maleMembers": 8,
-                "femaleMembers": 4,
-                "otherMembers": 1,
-                "onRent": "yes",
-                "houseImage": "house2.jpg",
-                "rentInfo": [
-                    {
-                        "rentOwner": "Krishna Giri",
-                        "annualIncome": 1000000,
-                        "occupation": "Driver",
-                        "contact": "1234567890",
-                        "address": "Shankhuwasava-5,khadbari",
-                        "totalMembers": 3,
-                        "maleMembers": 2,
-                        "femaleMembers": 1,
-                        "otherMembers": 0
-                    },
-                    {
-                        "rentOwner": "Ramesh Basnet",
-                        "annualIncome": 1500000,
-                        "occupation": "Auto Driver",
-                        "contact": "1234567890",
-                        "address": "khotang-5",
-                        "totalMembers": 3,
-                        "maleMembers": 2,
-                        "femaleMembers": 1,
-                        "otherMembers": 0
-                    }
-                ],
-                "type": 'population'
-            }
-        },
-        {
-            'type': 'Feature',
-            'id': 23,
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [87.280269, 26.816231]
-            },
-            properties: {
-                "houseNumber": 17,
-                "name": 'Nirmal Rai',
-                "storey": 4,
-                "ownerOccupation": 'Business',
-                "annualIncome": 8000000,
-                "contact": "982088396",
-                "address": "Chatara Line",
-                "totalMembers": 13,
-                "maleMembers": 3,
-                "femaleMembers": 4,
-                "otherMembers": 1,
-                "onRent": "yes",
-                "houseImage": "house3.jpg",
-                rentInfo: [
-                    {
-                        rentOwner: "Binod Giri",
-                        annualIncome: 1000000,
-                        occupation: "Driver",
-                        contact: "1234567890",
-                        address: "Shankhuwasava-5,khadbari",
-                        totalMembers: 3,
-                        maleMembers: 2,
-                        femaleMembers: 1,
-                        otherMembers: 0
-                    },
-                    {
-                        rentOwner: "Ganesh Basnet",
-                        annualIncome: 1500000,
-                        occupation: "Auto Driver",
-                        contact: "1234567890",
-                        address: "khotang-5",
-                        totalMembers: 3,
-                        maleMembers: 2,
-                        femaleMembers: 1,
-                        otherMembers: 0
-                    }
-                ],
-                "type": 'population'
-            }
-        },
-    ])
-    // const [data, setData] = useState([])
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 11,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.281845, 26.816449],
+    //         },
+    //         'properties': {
+    //             "name": 'Ward 12 office',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'governance'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 12,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.281741, 26.816630],
+    //         },
+    //         'properties': {
+    //             "name": 'Dharan Municipality',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'governance'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 13,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.277400, 26.816167],
+    //         },
+    //         'properties': {
+    //             "name": 'Star Hotel',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'hotel'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 14,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.278822, 26.815332],
+    //         },
+    //         'properties': {
+    //             "name": 'Zenith Hotel',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'hotel'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 15,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.279390, 26.814655],
+    //         },
+    //         'properties': {
+    //             "name": 'Shiva Mandir',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'culture'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 16,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.281369, 26.814031],
+    //         },
+    //         'properties': {
+    //             "name": 'Zame Maszid',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'culture'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 17,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.282886, 26.815184],
+    //         },
+    //         'properties': {
+    //             "name": 'Krishna Dhago Udhyog',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house2.jpg",
+    //             "type": 'industry'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 18,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.283443, 26.815871],
+    //         },
+    //         'properties': {
+    //             "name": 'Shiva Pauroti Udhyog',
+    //             "contactNumber": 12345,
+    //             "address": "dharan-12",
+    //             "houseImage": "house3.jpg",
+    //             "type": 'industry'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 19,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.283899, 26.816808],
+    //         },
+    //         'properties': {
+    //             "houseNumber": 13,
+    //             "name": 'Ram Kumar Thapa',
+    //             "storey": 3,
+    //             "ownerOccupation": 'Business',
+    //             "annualIncome": 500000,
+    //             "contact": "982088396",
+    //             "address": "Chatara Line",
+    //             "totalMembers": 13,
+    //             "maleMembers": 8,
+    //             "femaleMembers": 4,
+    //             "otherMembers": 1,
+    //             "onRent": "yes",
+    //             "houseImage": "house1.jpg",
+    //             "rentInfo": [
+    //                 {
+    //                     "rentOwner": "Samaya Wagle",
+    //                     "annualIncome": 3000000,
+    //                     "occupation": "Business",
+    //                     "contact": "1234567890",
+    //                     "address": "Dhankuta-5",
+    //                     "totalMembers": 5,
+    //                     "maleMembers": 2,
+    //                     "femaleMembers": 3,
+    //                     "otherMembers": 0
+    //                 }
+    //             ],
+    //             "type": 'population'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 20,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.279703, 26.816739],
+    //         },
+    //         'properties': {
+    //             "houseNumber": 14,
+    //             "name": 'Buddhi Bahadur Rai',
+    //             "storey": 3,
+    //             "ownerOccupation": 'Business',
+    //             "annualIncome": 500000,
+    //             "contact": "982088396",
+    //             "address": "Chatara Line",
+    //             "totalMembers": 13,
+    //             "maleMembers": 8,
+    //             "femaleMembers": 4,
+    //             "otherMembers": 1,
+    //             "onRent": "yes",
+    //             "houseImage": "house2.jpg",
+    //             "rentInfo": [
+    //                 {
+    //                     "rentOwner": "Gopal Giri",
+    //                     "annualIncome": 1000000,
+    //                     "occupation": "Driver",
+    //                     "contact": "1234567890",
+    //                     "address": "Shankhuwasava-5,khadbari",
+    //                     "totalMembers": 5,
+    //                     "maleMembers": 4,
+    //                     "femaleMembers": 1,
+    //                     "otherMembers": 0
+    //                 },
+    //                 {
+    //                     "rentOwner": "Ramesh Basnet",
+    //                     "annualIncome": 1500000,
+    //                     "occupation": "Auto Driver",
+    //                     "contact": "1234567890",
+    //                     "address": "khotang-5",
+    //                     "totalMembers": 3,
+    //                     "maleMembers": 2,
+    //                     "femaleMembers": 1,
+    //                     "otherMembers": 0
+    //                 }
+    //             ],
+    //             "type": 'population'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 21,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.280195, 26.816607]
+    //         },
+    //         'properties': {
+    //             "houseNumber": 15,
+    //             "name": 'Ramesh Jung Thapa',
+    //             "storey": 3,
+    //             "ownerOccupation": 'Business',
+    //             "annualIncome": 500000,
+    //             "contact": "982088396",
+    //             "address": "Chatara Line",
+    //             "totalMembers": 13,
+    //             "maleMembers": 8,
+    //             "femaleMembers": 4,
+    //             "otherMembers": 1,
+    //             "onRent": "yes",
+    //             "houseImage": "house2.jpg",
+    //             "rentInfo": [
+    //                 {
+    //                     "rentOwner": "Krishna Giri",
+    //                     "annualIncome": 1000000,
+    //                     "occupation": "Driver",
+    //                     "contact": "1234567890",
+    //                     "address": "Shankhuwasava-5,khadbari",
+    //                     "totalMembers": 3,
+    //                     "maleMembers": 2,
+    //                     "femaleMembers": 1,
+    //                     "otherMembers": 0
+    //                 },
+    //                 {
+    //                     "rentOwner": "Ramesh Basnet",
+    //                     "annualIncome": 1500000,
+    //                     "occupation": "Auto Driver",
+    //                     "contact": "1234567890",
+    //                     "address": "khotang-5",
+    //                     "totalMembers": 3,
+    //                     "maleMembers": 2,
+    //                     "femaleMembers": 1,
+    //                     "otherMembers": 0
+    //                 }
+    //             ],
+    //             "type": 'population'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 22,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.279838, 26.816284],
+    //         },
+    //         'properties': {
+    //             "houseNumber": 16,
+    //             "name": 'Govinda Bahadur Rai',
+    //             "storey": 3,
+    //             "ownerOccupation": 'Business',
+    //             "annualIncome": 500000,
+    //             "contact": "982088396",
+    //             "address": "Chatara Line",
+    //             "totalMembers": 13,
+    //             "maleMembers": 8,
+    //             "femaleMembers": 4,
+    //             "otherMembers": 1,
+    //             "onRent": "yes",
+    //             "houseImage": "house2.jpg",
+    //             "rentInfo": [
+    //                 {
+    //                     "rentOwner": "Krishna Giri",
+    //                     "annualIncome": 1000000,
+    //                     "occupation": "Driver",
+    //                     "contact": "1234567890",
+    //                     "address": "Shankhuwasava-5,khadbari",
+    //                     "totalMembers": 3,
+    //                     "maleMembers": 2,
+    //                     "femaleMembers": 1,
+    //                     "otherMembers": 0
+    //                 },
+    //                 {
+    //                     "rentOwner": "Ramesh Basnet",
+    //                     "annualIncome": 1500000,
+    //                     "occupation": "Auto Driver",
+    //                     "contact": "1234567890",
+    //                     "address": "khotang-5",
+    //                     "totalMembers": 3,
+    //                     "maleMembers": 2,
+    //                     "femaleMembers": 1,
+    //                     "otherMembers": 0
+    //                 }
+    //             ],
+    //             "type": 'population'
+    //         }
+    //     },
+    //     {
+    //         'type': 'Feature',
+    //         'id': 23,
+    //         'geometry': {
+    //             'type': 'Point',
+    //             'coordinates': [87.280269, 26.816231]
+    //         },
+    //         properties: {
+    //             "houseNumber": 17,
+    //             "name": 'Nirmal Rai',
+    //             "storey": 4,
+    //             "ownerOccupation": 'Business',
+    //             "annualIncome": 8000000,
+    //             "contact": "982088396",
+    //             "address": "Chatara Line",
+    //             "totalMembers": 13,
+    //             "maleMembers": 3,
+    //             "femaleMembers": 4,
+    //             "otherMembers": 1,
+    //             "onRent": "yes",
+    //             "houseImage": "house3.jpg",
+    //             rentInfo: [
+    //                 {
+    //                     rentOwner: "Binod Giri",
+    //                     annualIncome: 1000000,
+    //                     occupation: "Driver",
+    //                     contact: "1234567890",
+    //                     address: "Shankhuwasava-5,khadbari",
+    //                     totalMembers: 3,
+    //                     maleMembers: 2,
+    //                     femaleMembers: 1,
+    //                     otherMembers: 0
+    //                 },
+    //                 {
+    //                     rentOwner: "Ganesh Basnet",
+    //                     annualIncome: 1500000,
+    //                     occupation: "Auto Driver",
+    //                     contact: "1234567890",
+    //                     address: "khotang-5",
+    //                     totalMembers: 3,
+    //                     maleMembers: 2,
+    //                     femaleMembers: 1,
+    //                     otherMembers: 0
+    //                 }
+    //             ],
+    //             "type": 'population'
+    //         }
+    //     },
+    // ])
+    const [data, setData] = useState([])
 
     const [clickedButton, setClickedButton] = useState(1)
     const [selectedMapView, setSelectedMapView] = useState('General Map View')
@@ -846,7 +846,7 @@ const Dashboard = () => {
     useEffect(() => {
         const householdCount = data.filter(i => i.properties.type === 'population');
         setHouseHoldCount(householdCount)
-    }, [])
+    }, [data])
     const handleChangeSearch = (value) => {
         const householdCount = data.filter(i => i.properties.type === 'population');
         const filteredData = householdCount.filter((item, i) => (
@@ -899,62 +899,63 @@ const Dashboard = () => {
                 break;
         }
     }, [clickedButton])
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     http.get('/dataCollection', true)
-    //         .then(function (response) {
-    //             console.log("This is response", response.data.data)
-    //             const responseParse = response.data.data.map((item, index) => {
-    //                 const parsedData = {
-    //                     'type': 'Feature',
-    //                     'id': index + 1,
-    //                     'geometry': {
-    //                         'type': 'Point',
-    //                         'coordinates': [Number(item.geometry.coordinates[0]), Number(item.geometry.coordinates[1])],
-    //                     },
-    //                     'properties': {
-    //                         "houseNumber": item.properties.houseNumber,
-    //                         "name": item.properties.name,
-    //                         "storey": item.properties.storey,
-    //                         "ownerOccupation": item.properties.ownerOccupation,
-    //                         "annualIncome": Number(item.properties.annualIncome),
-    //                         "contact": item.properties.contact,
-    //                         "address": item.properties.address,
-    //                         "totalMembers": item.properties.totalMembers,
-    //                         "maleMembers": item.properties.maleMembers,
-    //                         "femaleMembers": item.properties.femaleMembers,
-    //                         "otherMembers": item.properties.otherMembers,
-    //                         "onRent": item.properties.onRent,
-    //                         "houseImage": item.properties.buildingImage,
-    //                         "rentInfo": item.properties.rentInfo.length ? item.properties.rentInfo.map((rent) => {
-    //                             return ({
-    //                                 "rentOwner": rent.rentOwner,
-    //                                 "annualIncome": Number(rent.annualIncome),
-    //                                 "occupation": rent.occupation,
-    //                                 "contact": rent.contact,
-    //                                 "address": rent.address,
-    //                                 "totalMembers": rent.totalMembers,
-    //                                 "maleMembers": rent.maleMembers,
-    //                                 "femaleMembers": rent.femaleMembers,
-    //                                 "otherMembers": rent.otherMembers
-    //                             })
-    //                         }) : [],
-    //                         "type": 'population'
-    //                     }
-    //                 }
-    //                 return parsedData
+        http.get('/dataCollection', true)
+            .then(function (response) {
+                console.log("This is response", response.data.data)
+                const responseParse = response.data.data.map((item, index) => {
+                    const parsedData = {
+                        'type': 'Feature',
+                        'id': index + 1,
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [Number(item.geometry.coordinates[1]), Number(item.geometry.coordinates[0])],
+                        },
+                        'properties': {
+                            "houseNumber": item.properties.houseNumber,
+                            "name": item.properties.name,
+                            "storey": item.properties.storey,
+                            "ownerOccupation": item.properties.ownerOccupation,
+                            "annualIncome": Number(item.properties.annualIncome),
+                            "contact": item.properties.contact,
+                            "address": item.properties.address,
+                            "totalMembers": item.properties.totalMembers,
+                            "maleMembers": item.properties.maleMembers,
+                            "femaleMembers": item.properties.femaleMembers,
+                            "otherMembers": item.properties.otherMembers,
+                            "onRent": item.properties.onRent,
+                            "houseImage": item.properties.buildingImage,
+                            "rentInfo": item.properties.rentInfo.length ? item.properties.rentInfo.map((rent) => {
+                                return ({
+                                    "rentOwner": rent.rentOwner,
+                                    "annualIncome": Number(rent.annualIncome),
+                                    "occupation": rent.occupation,
+                                    "contact": rent.contact,
+                                    "address": rent.address,
+                                    "totalMembers": rent.totalMembers,
+                                    "maleMembers": rent.maleMembers,
+                                    "femaleMembers": rent.femaleMembers,
+                                    "otherMembers": rent.otherMembers
+                                })
+                            }) : [],
+                            "type": 'population'
+                        }
+                    }
+                    return parsedData
 
-    //             })
-    //             console.log("Is this final data", JSON.stringify(responseParse))
-    //             setData(responseParse)
+                })
+                console.log("Is this final data", JSON.stringify(responseParse))
+                setData(responseParse)
 
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
-    // }, [])
+    }, [])
     console.log("This is external data", data)
+    console.log("This is household count", houseHoldCount)
 
     return (
         <div className='mainContainers' >

@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 import './styles.scss';
 import { statusProgressContext } from '../../Utils/Store';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import PaginationData from '../../Components/Pagination/Pagination';
 
 
 
@@ -507,7 +508,7 @@ const LandingPage = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         const datas = { ...data, geometry: { ...data.geometry, coordinates: [coordinates.long, coordinates.lat] } }
-
+        console.log("This datas", datas)
         console.log('Building image', buildingImage)
 
 
@@ -530,7 +531,7 @@ const LandingPage = () => {
                 "femaleMembers": datas.properties.femaleMembers,
                 "otherMembers": datas.properties.otherMembers,
                 "onRent": datas.properties.onRent,
-                "buildingImage": buildingImage,
+                "buildingImage": buildingImage || datas.properties.buildingImage,
                 "rentInfo": datas.properties.rentInfo,
                 "type": "population",
                 "isDataVerified": false
@@ -991,6 +992,7 @@ const LandingPage = () => {
 
                             </tbody>
                         </Table>
+                        <PaginationData />
                     </div>
                 </div>
             </div>
