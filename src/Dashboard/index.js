@@ -565,6 +565,7 @@ const Dashboard = () => {
         }
     }
     const householdData = data.filter(i => i.properties.type === 'population').map(itm => itm.properties);
+    console.log("householdData", householdData)
     const populationCalculation = householdData.map(itm => {
         const male = itm.maleMembers;
         const female = itm.femaleMembers;
@@ -641,6 +642,8 @@ const Dashboard = () => {
     const finalTotalMaleCount = populationCalculation.reduce(function (previousValue, currentValue) {
         return previousValue + currentValue.totalMale
     }, 0)
+    console.log("populationCalculation", populationCalculation)
+    console.log("This is final total male", finalTotalMaleCount)
     const finalTotalFemaleCount = populationCalculation.reduce(function (previousValue, currentValue) {
         return previousValue + currentValue.totalFemale
     }, 0)
@@ -903,14 +906,14 @@ const Dashboard = () => {
 
         http.get('/dataCollection', true)
             .then(function (response) {
-                console.log("This is response", response.data.data)
+
                 const responseParse = response.data.data.map((item, index) => {
                     const parsedData = {
                         'type': 'Feature',
                         'id': index + 1,
                         'geometry': {
                             'type': 'Point',
-                            'coordinates': [Number(item.geometry.coordinates[1]), Number(item.geometry.coordinates[0])],
+                            'coordinates': [Number(item.geometry.coordinates[0]), Number(item.geometry.coordinates[1])],
                         },
                         'properties': {
                             "houseNumber": item.properties.houseNumber,
@@ -933,10 +936,10 @@ const Dashboard = () => {
                                     "occupation": rent.occupation,
                                     "contact": rent.contact,
                                     "address": rent.address,
-                                    "totalMembers": rent.totalMembers,
-                                    "maleMembers": rent.maleMembers,
-                                    "femaleMembers": rent.femaleMembers,
-                                    "otherMembers": rent.otherMembers
+                                    "totalMembers": Number(rent.totalMembers),
+                                    "maleMembers": Number(rent.maleMembers),
+                                    "femaleMembers": Number(rent.femaleMembers),
+                                    "otherMembers": Number(rent.otherMembers)
                                 })
                             }) : [],
                             "type": 'population'
@@ -945,7 +948,7 @@ const Dashboard = () => {
                     return parsedData
 
                 })
-                console.log("Is this final data", JSON.stringify(responseParse))
+
                 setData(responseParse)
 
             })
@@ -954,8 +957,7 @@ const Dashboard = () => {
             });
 
     }, [])
-    console.log("This is external data", data)
-    console.log("This is household count", houseHoldCount)
+    console.log("data", data)
 
     return (
         <div className='mainContainers' >

@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 const SearchAndListDetails = ({ searchKeyword, setSearchError, setSearchKeyword, handleChangeSearch,
     houseHoldCount, setHoveredId, setFlyCoordinate
 }) => {
-    console.log("Household count", houseHoldCount)
+
     return (
         <div style={{ margin: '20px 0', display: 'flex', flexDirection: 'column', gap: '50px' }} >
             <div>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import cookie from 'js-cookie'
 import axios from 'axios';
@@ -11,7 +12,8 @@ import './styles.scss';
 import { statusProgressContext } from '../../Utils/Store';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import PaginationData from '../../Components/Pagination/Pagination';
-
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 
@@ -356,25 +358,35 @@ const LandingPage = () => {
     const [rentMemberCount, setRentMemberCount] = useState([0]);
     const [editDataClicked, setEditDataClicked] = useState(false)
     const [editDataId, setEditDataId] = useState()
-    // useEffect(() => {
-    //     axios.get('http://localhost:5000/api/v1/dataCollection')
-    //         .then(function (response) {
-    //             console.log("final result", response);
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         });
-    // }, [])
+
+    //data for pagination
+    const [totalDataCount, setTotalDataCount] = useState()
+    const [pageDataLimit, setPageDataLimit] = useState(3)
+    const [isLoading, setIsLoading] = useState(false)
+    const [searchWord, setSearchWord] = useState('')
+    const [searchActivated, setSearchActivated] = useState(false)
+    const [loading, setLoading] = useState(false)
 
 
-    const fetchData = () => {
-        http.get('/dataCollection', true)
+    const fetchData = (page, limit, searchKey) => {
+        console.log("What page limit", page, limit)
+        setLoading(true)
+        setIsLoading(true)
+        http.get(`/dataCollection?page=${page || 1}&limit=${limit}&search=${searchKey || ''}`, true)
             .then(function (response) {
 
                 setReceivedData(response.data.data)
+                setTotalDataCount(response.data.totalDataCount)
+                console.log("This is final response", response.data)
+                setIsLoading(false)
+                setLoading(false)
+                setSearchActivated(searchKey ? true : false)
+
+
             })
             .catch(function (error) {
                 console.log(error);
+                setIsLoading(false)
             });
     }
     const handleChange = (e) => {
@@ -508,8 +520,7 @@ const LandingPage = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         const datas = { ...data, geometry: { ...data.geometry, coordinates: [coordinates.long, coordinates.lat] } }
-        console.log("This datas", datas)
-        console.log('Building image', buildingImage)
+
 
 
         let form_data = {
@@ -621,7 +632,19 @@ const LandingPage = () => {
             }
         }
     }, [data.properties.onRent])
+    const handleClickPaginationButton = (page, limit) => {
+        http.get(`/dataCollection/?page=${page}&limit=${limit}`, true)
+            .then(function (response) {
 
+                setReceivedData(response.data.data)
+                setTotalDataCount(response.data.totalDataCount)
+                console.log("This is final response", response.data)
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 
     const handleRentDetails = (e, i) => {
         // const finalData = { ...data.properties.rentInfo[i], [e.target.name]: e.target.value }
@@ -645,8 +668,9 @@ const LandingPage = () => {
 
 
     useEffect(() => {
-        fetchData()
-    }, [])
+        console.log("This")
+        fetchData(null, pageDataLimit)
+    }, [pageDataLimit])
 
     const highestRentMemberCount = receivedData.length && Math.max(...receivedData.map(i => i.properties.rentInfo.length))
     const highestRentMemberArray = receivedData.length && receivedData
@@ -665,14 +689,7 @@ const LandingPage = () => {
         return finalOutput
     }
     const test = highestRentMemberArray.length && handleRentInformation(highestRentMemberArray)[0]
-    const handleRentDataInformation = (dataList) => {
-        let run = [];
 
-        const finalOutput = dataList.map((item) => {
-            run.push(...item)
-            return run
-        })
-    }
     const handleDataEditClick = (data) => {
 
         setEditDataId(data._id)
@@ -699,114 +716,29 @@ const LandingPage = () => {
 
 
     }
-    console.log("This is imageUpload.current.value", data)
+    const handleDataPerpage = (data) => {
+        setIsLoading(true)
+        setPageDataLimit(data)
+    }
+
+    const handleSearch = (e, searchActivated) => {
+        e.preventDefault()
+        console.log("This is search activated", searchActivated)
+
+        if (searchActivated) {
+            fetchData(null, pageDataLimit)
+            setSearchWord('')
+        } else {
+            fetchData(null, pageDataLimit, searchWord)
+        }
+
+
+    }
+
+    console.log("This is loading", isLoading)
+    console.log("This is total count", totalDataCount)
     return (
-        // <>
-        //     <div>This is landing page</div>
-        //     <button type="button" onClick={() => {
-        //         localStorage.clear()
-        //         history('/login')
 
-        //     }}>Logout</button>
-        //     <p>Information</p>
-        //     <input type="text" name="long" placeholder='Longitude' value={coordinates.long} onChange={(e) => setCoordinates({ ...coordinates, 'long': e.target.value })} /><br />
-        //     <input type="text" name="lat" placeholder='Latitude' value={coordinates.lat} onChange={(e) => setCoordinates({ ...coordinates, 'lat': e.target.value })} /><br />
-        //     <input type="number" name="houseNumber" placeholder="House Number" value={data.properties.houseNumber} onChange={(e) => handleChange(e)} /><br />
-        //     <input type="text" name="name" placeholder="Owner Name" value={data.properties.name} onChange={handleChange} /><br />
-        //     <input type="number" name='storey' placeholder="Storey" value={data.properties.storey} onChange={handleChange} /><br />
-        //     <input type="text" name="ownerOccupation" placeholder="Owner Occupation" value={data.properties.ownerOccupation} onChange={handleChange} /><br />
-        //     <input type="text" name="annualIncome" placeholder="Annual Income" value={data.properties.annualIncome} onChange={handleChange} /><br />
-        //     <input type="text" name="contact" placeholder="Contact" value={data.properties.contact} onChange={handleChange} /><br />
-        //     <input type="text" name="address" placeholder="Address" value={data.properties.address} onChange={handleChange} /><br />
-        //     <input type="number" name="totalMembers" placeholder="Total Family Members" value={data.properties.totalMembers} onChange={handleChange} /><br />
-        //     <input type="number" name="maleMembers" placeholder="Total male members" value={data.properties.maleMembers} onChange={handleChange} /><br />
-        //     <input type="number" name="femaleMembers" placeholder="Total Female Members" value={data.properties.femaleMembers} onChange={handleChange} /><br />
-        //     <input type="number" name="otherMembers" placeholder="Other members" value={data.properties.otherMembers} onChange={handleChange} /><br />
-        //     <input type="file" name="buildingImage" placeholder="photo" onChange={handleImage} /><br />
-        //     <p>House On Rent?</p>
-        //     <input type="radio" id="age1" name="onRent" value={true} onChange={() => {
-
-        //         handleRentStatus(true)
-        //     }} /><br />
-        //     <label for="age1" />Yes<br />
-        //     <input type="radio" id="age2" name="onRent" value={false} defaultChecked
-
-        //         onChange={() => {
-
-        //             handleRentStatus(false)
-        //         }} /><br />
-        //     <label for="age2" />No<br />
-        //     {data.properties.onRent ? <>
-        //         <button type='button' onClick={() => {
-        //             setData({
-        //                 ...data, properties: {
-        //                     ...data.properties,
-        //                     rentInfo: [...data.properties.rentInfo, {
-        //                         "rentOwner": "",
-        //                         "annualIncome": "",
-        //                         "occupation": "",
-        //                         "contact": "",
-        //                         "address": "",
-        //                         "totalMembers": "",
-        //                         "maleMembers": "",
-        //                         "femaleMembers": "",
-        //                         "otherMembers": ""
-        //                     }]
-        //                 }
-        //             })
-        //             setRentMemberCount([...rentMemberCount, rentMemberCount.length])
-        //         }} >Add</button>
-
-        //         {rentMemberCount.map((item, index) => (
-        //             <div key={item}>
-        //                 {index !== 0 &&
-        //                     <button type='button' onClick={() => {
-        //                         let finalRentInfoData = data.properties.rentInfo;
-        //                         finalRentInfoData.splice(index, 1);
-        //                         setData({
-        //                             ...data, properties: {
-        //                                 ...data.properties,
-        //                                 rentInfo: finalRentInfoData
-        //                             }
-        //                         })
-        //                         setRentMemberCount(rentMemberCount.filter(i => i !== item))
-        //                     }} >Remove</button>}
-        //                 <p >{'Rent Info' + index}</p>
-        //                 <input type="text" name="rentOwner" placeholder="Owner Name"
-        //                     value={data.properties.rentInfo.length && data.properties.rentInfo[index].rentOwner}
-        //                     onChange={(e) => handleRentDetails(e, index)} /><br />
-        //                 <input type="text" name="annualIncome" placeholder="Annual Income"
-        //                     value={data.properties.rentInfo.length && data.properties.rentInfo[index].annualIncome}
-        //                     onChange={(e) => handleRentDetails(e, index)} /><br />
-        //                 <input type="text" name="occupation" placeholder="Occupation"
-        //                     value={data.properties.rentInfo.length && data.properties.rentInfo[index].occupation}
-        //                     onChange={(e) => handleRentDetails(e, index)} /><br />
-        //                 <input type="text" name="contact" placeholder="Contact"
-        //                     value={data.properties.rentInfo.length && data.properties.rentInfo[index].contact}
-        //                     onChange={(e) => handleRentDetails(e, index)} /><br />
-        //                 <input type="text" name="address" placeholder="Address"
-        //                     value={data.properties.rentInfo.length && data.properties.rentInfo[index].address}
-        //                     onChange={(e) => handleRentDetails(e, index)} /><br />
-        //                 <input type="text" name="totalMembers" placeholder="Total Members"
-        //                     value={data.properties.rentInfo.length && data.properties.rentInfo[index].totalMembers}
-        //                     onChange={(e) => handleRentDetails(e, index)} /><br />
-        //                 <input type="text" name="maleMembers" placeholder="Male Members"
-        //                     value={data.properties.rentInfo.length && data.properties.rentInfo[index].maleMembers}
-        //                     onChange={(e) => handleRentDetails(e, index)} /><br />
-        //                 <input type="text" name="femaleMembers" placeholder="Female Members"
-        //                     value={data.properties.rentInfo.length && data.properties.rentInfo[index].femaleMembers}
-        //                     onChange={(e) => handleRentDetails(e, index)} /><br />
-        //                 <input type="text" name="otherMembers" placeholder="Other Members"
-        //                     value={data.properties.rentInfo.length && data.properties.rentInfo[index].otherMembers}
-        //                     onChange={(e) => handleRentDetails(e, index)} /><br />
-        //             </div>
-        //         ))}
-
-        //     </>
-        //         : ''
-        //     }
-        //     <button type="button" onClick={handleSubmit}>Submit</button>
-        // </>
         <div style={{ display: 'flex', flexDirection: 'column' }} >
             <div style={{ backgroundColor: 'cyan', height: '10vh' }} >Navbar
                 <button type="button" onClick={() => {
@@ -836,6 +768,16 @@ const LandingPage = () => {
                     <Button variant="primary" onClick={handleFileUpload}>
                         Submit File
                     </Button>
+                    <input style={{ width: '30%' }}
+                        type="text"
+                        placeholder='search by name,address or house number'
+                        value={searchWord}
+                        onChange={(e) => {
+                            setSearchActivated(false)
+                            setSearchWord(e.target.value)
+                        }} />
+                    <button type="button" onClick={(e) => handleSearch(e, searchActivated)} >{searchActivated ? 'Reset' : 'Search'}</button>
+                    <a href="http://localhost:5000/api/v1/datacollection/download" download>Download File</a>
                     <MyVerticallyCenteredModal
                         show={modalShow}
                         onHide={() => {
@@ -859,40 +801,42 @@ const LandingPage = () => {
                         editDataClicked={editDataClicked}
 
                     />
-                    <div>
-                        {showProgressBar ?
-                            <div className='progressBar' >
-                                <ProgressBar className='progressMainBar' now={statusProgress} label={`${statusProgress}%`} />
-                            </div> : ''}
-
-                        <Table striped bordered hover responsive size='md' className='tableData'  >
-                            <thead>
-                                <tr>
-                                    <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>House Number</th>
-                                    <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Image</th>
-                                    <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>House Owner</th>
-                                    <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Storey</th>
-                                    <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Owner Occupation</th>
-                                    <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Annual Income</th>
-                                    <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Contact</th>
-                                    <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Address</th>
-                                    <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>House on rent</th>
-                                    {test ? <th colSpan={highestRentMemberCount * 9} style={{ whiteSpace: 'nowrap' }}>Rent Information</th> : ''}
-                                    <th colSpan="4" style={{ whiteSpace: 'nowrap' }}>Family Members</th>
-                                    <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Is Verified</th>
-                                    <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Remarks</th>
-                                </tr>
-                                <tr>
-
-                                    {test ? test.map((item, index) => (
-
-                                        <th className='subHeader' style={{ whiteSpace: 'nowrap' }} key={index} >{item}</th>
+                    {isLoading ? <p>Loading...</p> :
+                        <div>
+                            {showProgressBar ?
+                                <div className='progressBar' >
+                                    <ProgressBar className='progressMainBar' now={statusProgress} label={`${statusProgress}%`} />
+                                </div> : ''}
 
 
-                                    )) : ''}
+                            <Table striped bordered hover responsive size='md' className='tableData'  >
+                                <thead>
+                                    <tr>
+                                        <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>House Number</th>
+                                        <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Image</th>
+                                        <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>House Owner</th>
+                                        <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Storey</th>
+                                        <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Owner Occupation</th>
+                                        <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Annual Income</th>
+                                        <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Contact</th>
+                                        <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Address</th>
+                                        <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>House on rent</th>
+                                        {test ? <th colSpan={highestRentMemberCount * 9} style={{ whiteSpace: 'nowrap', textAlign: 'center' }}>Rent Information</th> : ''}
+                                        <th colSpan="4" style={{ whiteSpace: 'nowrap', textAlign: 'center' }}>Family Members</th>
+                                        <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Is Verified</th>
+                                        <th rowSpan="2" style={{ whiteSpace: 'nowrap' }}>Remarks</th>
+                                    </tr>
+                                    <tr>
+
+                                        {test ? test.map((item, index) => (
+
+                                            <th className='subHeader' style={{ whiteSpace: 'nowrap' }} key={index} >{item}</th>
 
 
-                                    {/* <th className='subHeader' style={{ whiteSpace: 'nowrap' }}>Rent Owner</th>
+                                        )) : ''}
+
+
+                                        {/* <th className='subHeader' style={{ whiteSpace: 'nowrap' }}>Rent Owner</th>
                                     <th className='subHeader' style={{ whiteSpace: 'nowrap' }}>Occupation</th>
                                     <th className='subHeader' style={{ whiteSpace: 'nowrap' }}>Annual Income</th>
                                     <th className='subHeader' style={{ whiteSpace: 'nowrap' }}>Contact</th>
@@ -905,60 +849,60 @@ const LandingPage = () => {
 
 
 
-                                    <th className='subHeader' style={{ whiteSpace: 'nowrap' }}> Total family members</th>
-                                    <th className='subHeader' style={{ whiteSpace: 'nowrap' }}>Male</th>
-                                    <th className='subHeader' style={{ whiteSpace: 'nowrap' }}>Female</th>
-                                    <th className='subHeader' style={{ whiteSpace: 'nowrap' }}>Other</th>
+                                        <th className='subHeader' style={{ whiteSpace: 'nowrap' }}> Total family members</th>
+                                        <th className='subHeader' style={{ whiteSpace: 'nowrap' }}>Male</th>
+                                        <th className='subHeader' style={{ whiteSpace: 'nowrap' }}>Female</th>
+                                        <th className='subHeader' style={{ whiteSpace: 'nowrap' }}>Other</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {receivedData.length ? receivedData.map((data) => (
-                                    <tr key={data.id}>
-                                        <td>{data.properties.houseNumber}</td>
-                                        <td>
-                                            <a href={data.properties.buildingImage} target="_blank" rel="noreferrer">
-                                                <img src={data.properties.buildingImage} alt="house" height={100} width={100} style={{ cursor: 'pointer', objectFit: 'contain' }} />
-                                            </a>
-                                        </td>
-                                        <td>{data.properties.name}</td>
-                                        <td>{data.properties.storey}</td>
-                                        <td>{data.properties.ownerOccupation}</td>
-                                        <td>{data.properties.annualIncome}</td>
-                                        <td>{data.properties.contact}</td>
-                                        <td>{data.properties.address}</td>
-                                        <td>{data.properties.onRent ? 'Yes' : 'No'}</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {receivedData.length ? receivedData.map((data) => (
+                                        <tr key={data.id}>
+                                            <td>{data.properties.houseNumber}</td>
+                                            <td>
+                                                <a href={data.properties.buildingImage} target="_blank" rel="noreferrer">
+                                                    <img src={data.properties.buildingImage} alt="house" height={100} width={100} style={{ cursor: 'pointer', objectFit: 'contain' }} />
+                                                </a>
+                                            </td>
+                                            <td>{data.properties.name}</td>
+                                            <td>{data.properties.storey}</td>
+                                            <td>{data.properties.ownerOccupation}</td>
+                                            <td>{data.properties.annualIncome}</td>
+                                            <td>{data.properties.contact}</td>
+                                            <td>{data.properties.address}</td>
+                                            <td>{data.properties.onRent ? 'Yes' : 'No'}</td>
 
-                                        {
-                                            highestRentMemberArray.length ? highestRentMemberArray.map((itm, indx) => (
+                                            {
+                                                highestRentMemberArray.length ? highestRentMemberArray.map((itm, indx) => (
 
-                                                <>
-                                                    <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].rentOwner === '' ? '-' : data.properties.rentInfo[indx].rentOwner : '-'}</td>
-                                                    <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].occupation === '' ? '-' : data.properties.rentInfo[indx].occupation : '-'}</td>
-                                                    <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].annualIncome === '' ? '-' : data.properties.rentInfo[indx].annualIncome : '-'}</td>
-                                                    <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].contact === '' ? '-' : data.properties.rentInfo[indx].contact : '-'}</td>
-                                                    <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].address === '' ? '-' : data.properties.rentInfo[indx].address : '-'}</td>
-                                                    <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].totalMembers === '' ? '-' : data.properties.rentInfo[indx].totalMembers : '-'}</td>
-                                                    <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].maleMembers === '' ? '-' : data.properties.rentInfo[indx].maleMembers : '-'}</td>
-                                                    <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].femaleMembers === '' ? '-' : data.properties.rentInfo[indx].femaleMembers : '-'}</td>
-                                                    <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].otherMembers === '' ? '-' : data.properties.rentInfo[indx].otherMembers : '-'}</td>
-                                                </>
+                                                    <>
+                                                        <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].rentOwner === '' ? '-' : data.properties.rentInfo[indx].rentOwner : '-'}</td>
+                                                        <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].occupation === '' ? '-' : data.properties.rentInfo[indx].occupation : '-'}</td>
+                                                        <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].annualIncome === '' ? '-' : data.properties.rentInfo[indx].annualIncome : '-'}</td>
+                                                        <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].contact === '' ? '-' : data.properties.rentInfo[indx].contact : '-'}</td>
+                                                        <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].address === '' ? '-' : data.properties.rentInfo[indx].address : '-'}</td>
+                                                        <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].totalMembers === '' ? '-' : data.properties.rentInfo[indx].totalMembers : '-'}</td>
+                                                        <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].maleMembers === '' ? '-' : data.properties.rentInfo[indx].maleMembers : '-'}</td>
+                                                        <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].femaleMembers === '' ? '-' : data.properties.rentInfo[indx].femaleMembers : '-'}</td>
+                                                        <td>{data.properties.rentInfo[indx] ? data.properties.rentInfo[indx].otherMembers === '' ? '-' : data.properties.rentInfo[indx].otherMembers : '-'}</td>
+                                                    </>
 
-                                            ))
-                                                : ''}
-                                        <td>{data.properties.totalMembers}</td>
-                                        <td>{data.properties.maleMembers}</td>
-                                        <td>{data.properties.femaleMembers}</td>
-                                        <td>{data.properties.otherMembers}</td>
-                                        <td>{data.properties.isDataVerified ? 'Yes' : 'No'}</td>
-                                        <td>
-                                            <button type='button' onClick={() => handleDataEditClick(data)}>Edit</button>
-                                            <button type='button'>Delete</button>
-                                        </td>
+                                                ))
+                                                    : ''}
+                                            <td>{data.properties.totalMembers}</td>
+                                            <td>{data.properties.maleMembers}</td>
+                                            <td>{data.properties.femaleMembers}</td>
+                                            <td>{data.properties.otherMembers}</td>
+                                            <td>{data.properties.isDataVerified ? 'Yes' : 'No'}</td>
+                                            <td>
+                                                <button type='button' onClick={() => handleDataEditClick(data)}>Edit</button>
+                                                <button type='button'>Delete</button>
+                                            </td>
 
 
 
-                                        {/* {data.properties.rentInfo.length ? data.properties.rentInfo.map((d) => (
+                                            {/* {data.properties.rentInfo.length ? data.properties.rentInfo.map((d) => (
                                             <>
                                                 <td>{d.rentOwner}</td>
                                                 <td>{d.occupation}</td>
@@ -987,16 +931,34 @@ const LandingPage = () => {
                                         } */}
 
 
-                                    </tr>
-                                )) : 'No Data Available'}
+                                        </tr>
+                                    )) : 'No Data Available'}
 
-                            </tbody>
-                        </Table>
-                        <PaginationData />
+                                </tbody>
+                            </Table>
+
+
+                        </div>}
+                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                        <div style={{ display: 'flex' }}>
+                            <p>Data Per Page</p>
+                            <DropdownButton id="dropdown-basic-button" title={pageDataLimit}>
+                                <Dropdown.Item onClick={() => handleDataPerpage(3)} >3</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleDataPerpage(5)}>5</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleDataPerpage(8)}>8</Dropdown.Item>
+                            </DropdownButton>
+                        </div>
+                        < PaginationData
+                            totalDataCount={totalDataCount}
+                            itemsPerPage={pageDataLimit}
+                            handleClickPaginationButton={fetchData}
+                            searchWord={searchWord}
+
+                        />
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

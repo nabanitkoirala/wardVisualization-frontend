@@ -48,7 +48,7 @@ const Login = () => {
             ...user, [e.target.name]: e.target.value
         })
     }
-    console.log("This is user info available", userInfoAvailable)
+
     const handleLogin = () => {
         axios.post('http://localhost:5000/api/v1/auth/login', user)
             // axios.post('https://test-kobo.herokuapp.com/api/v1/auth/login', user)

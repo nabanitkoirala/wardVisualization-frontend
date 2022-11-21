@@ -51,15 +51,13 @@ function post(url, data, isSecure, isMultipart, setStatusProgress) {
             headers: getHeaders(isSecure, isMultipart),
             onUploadProgress: (progressEvent) => {
                 const progress = (progressEvent.loaded / progressEvent.total) * 50;
-                console.log("This is progress", progressEvent.loaded)
-                console.log("This is output", progressEvent.total)
-                console.log("This is final progress", progress)
+
                 setStatusProgress(progress)
 
             },
             onDownloadProgress: (progressEvent) => {
                 const progress = 50 + (progressEvent.loaded / progressEvent.total) * 50;
-                console.log("Final test for ouptut", progress);
+
                 setStatusProgress(progress)
 
             },
@@ -79,15 +77,13 @@ function put(url, data, isSecure, isMultipart, setStatusProgress) {
             headers: getHeaders(isSecure, isMultipart),
             onUploadProgress: (progressEvent) => {
                 const progress = (progressEvent.loaded / progressEvent.total) * 50;
-                console.log("This is progress", progressEvent.loaded)
-                console.log("This is output", progressEvent.total)
-                console.log("This is final progress", progress)
+
                 setStatusProgress(progress)
 
             },
             onDownloadProgress: (progressEvent) => {
                 const progress = 50 + (progressEvent.loaded / progressEvent.total) * 50;
-                console.log("Final test for ouptut", progress);
+
                 setStatusProgress(progress)
 
             },
