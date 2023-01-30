@@ -475,7 +475,7 @@ const LandingPage = () => {
         //         'content-type': 'multipart/form-data'
         //     }
         // })
-        http.post('/dataCollection/?email=user@gmail.com&password=user123', form_data, false, true, setStatusProgress)
+        http.post('/dataCollection', form_data, false, true, setStatusProgress)
             .then(res => {
 
                 fetchData()
