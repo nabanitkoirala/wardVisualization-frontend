@@ -432,6 +432,7 @@ const LandingPage = () => {
             }).catch(err => console.log("Error", err))
 
     }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const datas = { ...data, geometry: { ...data.geometry, coordinates: [coordinates.long, coordinates.lat] } }
@@ -475,7 +476,7 @@ const LandingPage = () => {
         //         'content-type': 'multipart/form-data'
         //     }
         // })
-        http.post('/dataCollection', form_data, false, true, setStatusProgress)
+        http.post('/dataCollection', form_data, true, true, setStatusProgress)
             .then(res => {
 
                 fetchData()
