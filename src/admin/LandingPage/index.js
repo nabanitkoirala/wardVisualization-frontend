@@ -778,7 +778,7 @@ const LandingPage = () => {
                         }} />
                     <button type="button" onClick={(e) => handleSearch(e, searchActivated)} >{searchActivated ? 'Reset' : 'Search'}</button>
                     {/* <a href="http://localhost:5000/api/v1/datacollection/download" download>Download File</a> */}
-                    <a href="https://ward-visualization-backend.onrender.com/api/v1/download" download>Download File</a>
+                    <a href="https://ward-visualization-backend.onrender.com/api/v1/datacollection/download" download>Download File</a>
                     <MyVerticallyCenteredModal
                         show={modalShow}
                         onHide={() => {
