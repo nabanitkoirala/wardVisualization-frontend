@@ -432,7 +432,6 @@ const LandingPage = () => {
             }).catch(err => console.log("Error", err))
 
     }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const datas = { ...data, geometry: { ...data.geometry, coordinates: [coordinates.long, coordinates.lat] } }
@@ -476,7 +475,7 @@ const LandingPage = () => {
         //         'content-type': 'multipart/form-data'
         //     }
         // })
-        http.post('/dataCollection', form_data, true, true, setStatusProgress)
+        http.post('/dataCollection/?email=user@gmail.com&password=user123', form_data, false, true, setStatusProgress)
             .then(res => {
 
                 fetchData()
@@ -778,7 +777,6 @@ const LandingPage = () => {
                             setSearchWord(e.target.value)
                         }} />
                     <button type="button" onClick={(e) => handleSearch(e, searchActivated)} >{searchActivated ? 'Reset' : 'Search'}</button>
-                    {/* <a href="http://localhost:5000/api/v1/datacollection/download" download>Download File</a> */}
                     <a href="https://ward-visualization-backend.onrender.com/api/v1/datacollection/download" download>Download File</a>
                     <MyVerticallyCenteredModal
                         show={modalShow}
